@@ -1,0 +1,30 @@
+{
+  "tags": ["important", "today", "week"],
+  "todos": [
+    {
+      "id": 1,
+      "desc": "PRUDENTIAL: Send email to Denise on few line on the portion of the new AWS enabled data platform @today",
+      "status": "pending",
+      "modified": "2023-09-25T13:00:04.792Z"
+    }
+  ],
+  "reminders": [
+    {
+      "id": 1,
+      "desc": "Send timesheet from Prudential to JSR, Pamten",
+      "status": "open",
+      "due": "2023-10-03T13:00:04.792Z",
+      "type": "weekly",
+      "modified": "2023-09-25T13:00:04.792Z"
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "parent": 1,
+      "desc": "Write email first",
+      "status": "pending",
+      "modified": "2023-09-25T13:00:04.792Z"
+    }
+  ]
+}
