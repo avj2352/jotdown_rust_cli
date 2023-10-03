@@ -1,12 +1,11 @@
 # ✏️Jotdown - Todo CLI app using Rust
 
+![version](https://img.shields.io/badge/version-0.1.02-blue) [![Rust](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml/badge.svg)](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml)
+
 - A modern Todo application with extra features!
 - I'd probably go with **Jotdown** until I get a better name!
 
-![version](https://img.shields.io/badge/version-0.1.02-blue) [![Rust](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml/badge.svg)](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml)
-
-> NOTE: There are 17 representations of white space in unicode text format. So using `text.split_whitespace()` is much
-better alternative to the `.split()` method in Rust
+## 🚧 WORK IN PROGRESS 🚧
 
 ## Todo synonyms, alternate names to the app
 
@@ -101,6 +100,10 @@ Typically structure of a `todo-db.json`
   ]
 }
 ```
+
+> NOTE: There are 17 representations of white space in unicode text format. So using `text.split_whitespace()` is much
+better alternative to the `.split()` method in Rust
+
 # Rust - Read and Write to JSON
 
 To store a HashMap as a JSON file in Rust, you can use the `serde_json` crate. 
