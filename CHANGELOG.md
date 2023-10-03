@@ -5,4 +5,5 @@
 - Initialize repo
 - Setup folder structure
 - Install required dependencies
+- Added Config file `config.rs` for DB file generation
 

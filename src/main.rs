@@ -1,5 +1,6 @@
 mod util;
 mod features;
+mod facade;
 
 use clap::{ command };
 use features::command::gen_list_command;
