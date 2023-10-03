@@ -3,7 +3,7 @@
 - A modern Todo application with extra features!
 - I'd probably go with **Jotdown** until I get a better name!
 
-![version](https://img.shields.io/badge/version-0.1.02-blue)
+![version](https://img.shields.io/badge/version-0.1.02-blue) [![Rust](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml/badge.svg)](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml)
 
 > NOTE: There are 17 representations of white space in unicode text format. So using `text.split_whitespace()` is much
 better alternative to the `.split()` method in Rust
