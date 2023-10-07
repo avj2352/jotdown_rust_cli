@@ -1,6 +1,6 @@
 # ✏️Jotdown - Todo CLI app using Rust
 
-![version](https://img.shields.io/badge/version-0.1.02-blue) [![Rust](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml/badge.svg)](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml)
+![version](https://img.shields.io/badge/version-0.1.03-blue) [![Rust](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml/badge.svg)](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml)
 
 - A modern Todo application with extra features!
 - I'd probably go with **Jotdown** until I get a better name!
@@ -15,6 +15,7 @@
 
 ## Important Links
 
+- [⏰JSON to serde_json struct - online generator](https://transform.tools/json-to-rust-serde)
 - [Clap Rust Tutorial](https://www.youtube.com/watch?v=Ot3qCA3Iv_8)
 - [Clap crate documentation](https://docs.rs/clap/latest/clap/_tutorial/chapter_0/index.html)
 - [Linkedin - Rust file processing](https://www.linkedin.com/learning/practice-it-rust-file-manipulation/preassessment)
@@ -50,6 +51,7 @@ Jotdown CLI features -
     jd clear                            Destroy all todo items
     jd clear --done                     Destroy all completed todo items
     jd renumber                         Re-numbers all todos starting with 1
+    jd sort "@important @high"          Sort Todos in the order of their tags as mentioned
 
   Environment variables:
 
@@ -74,7 +76,7 @@ Typically structure of a `todo-db.json`
   "todos": [
     {
       "id": 1,
-      "desc": "PRUDENTIAL: Send email to Denise on few line on the portion of the new AWS enabled data platform @today",
+      "desc": "HOME: Buy groceries for the week @today",
       "status": "pending",
       "modified": "2023-09-25T13:00:04.792Z"
     }
@@ -82,7 +84,7 @@ Typically structure of a `todo-db.json`
   "reminders": [
     {
       "id": 1,
-      "desc": "Send timesheet from Prudential to JSR, Pamten",
+      "desc": "WORK: Send Email to Denise",
       "status": "open",
       "due": "2023-10-03T13:00:04.792Z",
       "type": "weekly",
@@ -93,7 +95,7 @@ Typically structure of a `todo-db.json`
     {
       "id": 1,
       "parent": 1,
-      "desc": "Write email first",
+      "desc": "Order on Amazon Fresh",
       "status": "pending",
       "modified": "2023-09-25T13:00:04.792Z"
     }

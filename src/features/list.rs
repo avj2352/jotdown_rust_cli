@@ -1,9 +1,7 @@
 use clap::{ arg, ArgAction, Command };
-
 /**
-* Consists of all "jotdown" - commands, subcommands, arguments
+* Consists of "jotdown" / "jd" - list commands
 */
-
 
 // LIST ==============================================================
 

@@ -255,6 +255,7 @@ dependencies = [
  "chrono",
  "clap",
  "colored",
+ "rustc-serialize",
  "serde",
  "serde_derive",
  "serde_json",
@@ -325,6 +326,12 @@ checksum = "5267fca4496028628a95160fc423a33e8b2e6af8a5302579e322e4b520293cae"
 dependencies = [
  "proc-macro2",
 ]
+
+[[package]]
+name = "rustc-serialize"
+version = "0.3.24"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "dcf128d1287d2ea9d80910b5f1120d0b8eede3fbf1abe91c40d39ea7d51e6fda"
 
 [[package]]
 name = "rustix"

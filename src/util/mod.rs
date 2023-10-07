@@ -1,4 +1,4 @@
 pub mod enums;
 pub mod helpers;
-mod models;
-mod config;
+pub mod models;
+pub mod config;

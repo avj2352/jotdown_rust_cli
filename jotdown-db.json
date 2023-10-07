@@ -12,9 +12,9 @@
     {
       "id": 1,
       "desc": "Send timesheet from Prudential to JSR, Pamten",
-      "status": "open",
+      "status": "pending",
       "due": "2023-10-03T13:00:04.792Z",
-      "type": "weekly",
+      "reminder_type": "weekly",
       "modified": "2023-09-25T13:00:04.792Z"
     }
   ],

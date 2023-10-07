@@ -1,20 +1,27 @@
-use std::io::{self, BufRead};
+use std::io::{self, BufRead, Read};
 use std::fs::{self, File};
-use crate::util::enums::TodoStatusType;
-use crate::util::models::Todo;
+use crate::util::config::get_db_file_path;
 
 /**
-* Helper methods
-* Lessons from Linkedin - Rust - File Manipulation
+* Helper methods ***********************************
+* ...contains lessons from Linkedin - Rust - File Manipulation
 */
-pub fn read_file_from_path() -> Result<String, String> {
-    let source_json = "jotdown-db.json";
-    let contents: String = fs::read_to_string(source_json).unwrap();
-    Ok(contents)
+
+/**
+* Read file contents to string
+* @returns {String} file contents as string
+*/
+pub fn read_file_from_path() -> String {
+    let file_path: String = get_db_file_path();
+    let mut file: File = File::open(file_path).unwrap();
+    let mut json_string: String = String::new();
+    file.read_to_string(&mut json_string).unwrap();
+    json_string
 }
 
 /**
 * Using BufReader for reading large files
+* FOR TESTING PURPOSE
 */
 pub fn read_file_with_lines() -> Result<Vec<String>, String> {
     let source_json = "jotdown-db.json";
@@ -26,6 +33,10 @@ pub fn read_file_with_lines() -> Result<Vec<String>, String> {
     Ok(result)
 }
 
+/**
+ * Using Vectors fith file reads
+ * FOR TESTING PURPOSE
+ */
 pub fn return_lines_only_if_contains_string(test: &str) -> Result<Vec<String>, String> {
     let source_json = "jotdown-db.json";
     let file: String = fs::read_to_string(source_json).unwrap();
@@ -38,15 +49,7 @@ pub fn return_lines_only_if_contains_string(test: &str) -> Result<Vec<String>, S
     Ok(results)
 }
 
-pub fn generate_todo_json() -> String {
-    let todo: Todo = Todo {
-        id: 1,
-        desc: "this is a test pojo".to_string(),
-        status: TodoStatusType::Pending,
-        modified: "2023-10-02".to_string()
-    };
-    serde_json::to_string(&todo).unwrap()
-}
+
 
 #[cfg(test)]
 mod tests {
@@ -54,7 +57,7 @@ mod tests {
 
     #[test]
     fn test_read_file_contains_default_tags() {
-        let result: String = read_file_from_path().unwrap();
+        let result: String = read_file_from_path();
         assert_eq!(true, result.as_str().contains("tags"));
         assert_eq!(true, result.as_str().contains("important"));
         assert_eq!(true, result.as_str().contains("today"));
@@ -72,12 +75,5 @@ mod tests {
         let result: Vec<String> = return_lines_only_if_contains_string("important").unwrap();
         // println!("result is: {:?}", &result);
         assert_eq!(true, result.len() > 0);
-    }
-
-    #[test]
-    fn test_serializing_json() {
-        let result: String = generate_todo_json();
-        println!("Serialized json: {}", &result);
-        assert_eq!(true, result != "");
     }
 }

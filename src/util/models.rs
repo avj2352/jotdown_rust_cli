@@ -1,38 +1,42 @@
-use serde_derive::{Deserialize, Serialize};
-// custom
-use crate::util::enums::{ TodoStatusType, ReminderType };
+use serde_derive::Deserialize;
+use serde_derive::Serialize;
 
-/**
-* Collection of structs used for serialization, deserialization
-*/
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct FileRequestResponse {
+    pub tags: Vec<String>,
+    pub todos: Vec<Todo>,
+    pub reminders: Vec<Reminder>,
+    pub tasks: Vec<Task>,
+}
 
-/**
-* Todo struct
-*/
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Todo {
-    pub id: i32,
+    pub id: i64,
     pub desc: String,
-    pub status: TodoStatusType,
-    pub modified: String
+    pub status: String,
+    pub modified: String,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Reminder {
-    id: i32,
-    desc: String,
-    status: TodoStatusType,
-    due: String,
-    reminder_type: ReminderType,
-    modified: String
+    pub id: i64,
+    pub desc: String,
+    pub status: String,
+    pub due: String,
+    #[serde(rename = "reminder_type")]
+    pub reminder_type: String,
+    pub modified: String,
 }
 
-
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Task {
-    id: i32,
-    parent: i32,
-    desc: String,
-    status: TodoStatusType,
-    modified: String
+    pub id: i64,
+    pub parent: i64,
+    pub desc: String,
+    pub status: String,
+    pub modified: String,
 }
