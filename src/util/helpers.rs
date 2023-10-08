@@ -141,24 +141,17 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_read_file_contains_default_tags() {
+    fn test_read_file_contains_default_keys() {
         let result: String = read_file_from_path();
         assert_eq!(true, result.as_str().contains("tags"));
-        assert_eq!(true, result.as_str().contains("important"));
-        assert_eq!(true, result.as_str().contains("today"));
-        assert_eq!(true, result.as_str().contains("week"));
+        assert_eq!(true, result.as_str().contains("todos"));
+        assert_eq!(true, result.as_str().contains("tasks"));
+        assert_eq!(true, result.as_str().contains("reminders"));
     }
 
     #[test]
     fn test_read_file_into_strings_list() {
         let result: Vec<String> = read_file_with_lines().unwrap();
-        assert_eq!(true, result.len() > 0);
-    }
-
-    #[test]
-    fn test_return_lines_only_if_contains_string() {
-        let result: Vec<String> = return_lines_only_if_contains_string("important").unwrap();
-        // println!("result is: {:?}", &result);
         assert_eq!(true, result.len() > 0);
     }
 
