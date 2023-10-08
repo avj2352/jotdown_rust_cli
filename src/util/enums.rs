@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use colored::Colorize;
 
 /**
 * Collection of all CLI related enums
@@ -23,20 +24,36 @@ pub enum ReminderType {
     Hourly,
 }
 
-#[allow(dead_code)]
-#[derive(Serialize, Deserialize, Debug)]
-/// Emoji Map Type of Task Priority - 🔥, ⏰, 📅, ☀️, 😎
-pub enum PriorityType {
-    Burning,
-    High,
-    Medium,
-    Low,
-    Casual
-}
+
 
 /// Emoji map for todo status - pending, done
 #[derive(Serialize, Deserialize, Debug)]
 pub enum TodoStatusType {
     Pending,
     Done
+}
+
+// Enum for Colorizing
+// Emoji Map Type of Task Priority - 🔥, 🚨, 📅, ☁️, 💡
+// TODO: Add more variant for different colors
+#[derive(Serialize, Deserialize, Debug, PartialEq)]
+pub enum StatusColorType {
+    Important,
+    Today,
+    Week,
+    Month,
+    Info
+}
+
+// Enum methods
+impl StatusColorType {
+    pub fn highlight_color(&self, phrase: String) -> String {
+        return match *self {
+            StatusColorType::Important => format!("{}", phrase.as_str().red().bold()),
+            StatusColorType::Today => format!("{}", phrase.as_str().blue().bold()),
+            StatusColorType::Week => format!("{}", phrase.as_str().green().bold()),
+            StatusColorType::Month => format!("{}", phrase.as_str().cyan().bold()),
+            StatusColorType::Info => format!("{}", phrase.as_str().purple().bold()),
+        }
+    }
 }

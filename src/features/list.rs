@@ -1,9 +1,8 @@
 use clap::{ arg, ArgAction, Command };
 /**
 * Consists of "jotdown" / "jd" - list commands
+* LIST ==============================================================
 */
-
-// LIST ==============================================================
 
 /**
 * LIST command
@@ -14,11 +13,9 @@ use clap::{ arg, ArgAction, Command };
 * @returns {Command} returns subcommand
 */
 pub fn gen_list_command() -> Command {
-    Command::new("list")
+    Command::new("ls")
         .about("lists all todos, tasks, reminders")
         .arg(arg!(-t --todos "lists all todos").action(ArgAction::SetTrue))
         .arg(arg!(-r --reminders "lists all reminders").action(ArgAction::SetTrue))
         .arg(arg!(-a --all "lists all todos, tasks, reminders").action(ArgAction::SetTrue))
 }
-
-// LIST ==============================================================

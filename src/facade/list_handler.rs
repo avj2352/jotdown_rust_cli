@@ -1,13 +1,29 @@
-use std::io::Read;
 use clap::ArgMatches;
 use serde_json::from_str;
 // custom
-use crate::util::helpers::read_file_from_path;
+use crate::util::helpers::{highlight_text, read_file_from_path};
 use crate::util::models::{FileRequestResponse, Task, Todo};
 /**
 * List command handler ***********************************
-* consists of handlers for jotdown list subcommand
+* consists of handlers for jotdown "ls" subcommand
+* > jd ls
 */
+
+/**
+ * "ls -t" or default subcommand handler
+ * @param {&ArgMatches} args
+ */
+pub fn handle_list (matches: &ArgMatches) {
+    if matches.get_flag("all") {
+        list_all_todos();
+    } else if matches.get_flag("todos") {
+        list_pending_todos();
+    }
+    else {
+        // default > "ls -t"
+        list_pending_todos();
+    }
+}
 
 
 /**
@@ -21,21 +37,17 @@ pub fn parse_json_from_string(input: String) -> FileRequestResponse {
 
 
 /**
- * list todo handler
+ * list all todos - pending & done
  * @returns {Vec<String>} task list
  */
-pub fn list_todo() -> Vec<String> {
+pub fn fetch_todo() -> Vec<Todo> {
     let json_string: String = read_file_from_path();
     let response = parse_json_from_string(json_string);
-    let todo_list: Vec<Todo> = response.todos;
-    if todo_list.len() == 0  {
-        return vec![];
-    }
-    todo_list.iter().map(|item| String::from(&item.desc)).collect()
+    response.todos
 }
 
 /**
-* list task handler
+* list task subcommand handler
 * @returns {Vec<String>} task list
 */
 pub fn list_task() -> Vec<String> {
@@ -48,18 +60,43 @@ pub fn list_task() -> Vec<String> {
     task_list.iter().map(|item| String::from(&item.desc)).collect()
 }
 
-pub fn handle_list_todo(matches: &ArgMatches) {
-    // "$ myapp test" was run
-    if matches.get_flag("todos") {
-        // "$ myapp test -l" was run
-        let todo_list: Vec<String> = list_todo();
-        println!("✏️ Todos: ");
-        for item in todo_list {
-            println!("❌ {}", item.as_str());
+/**
+* "ls -t" or default subcommand handler
+* @param {&ArgMatches} args
+*/
+pub fn list_all_todos() {
+    let todo_list: Vec<Todo> = fetch_todo();
+    println!("\n💡 Todos: \n");
+    for (index, item) in todo_list
+        .iter()
+        .enumerate() {
+            let text= highlight_text(&item.desc);
+            if item.status == "done" {
+                println!("{}.  ✅  {}", item.id, text);
+            } else {
+                println!("{}.  ❌  {}", item.id, text);
+            }
         }
-    } else {
-        println!("Not printing list...");
-    }
+}
+
+/**
+ * "ls -t" or default subcommand handler
+ * @param {&ArgMatches} args
+ */
+pub fn list_pending_todos() {
+    let todo_list: Vec<Todo> = fetch_todo();
+    println!("\n💡 Todos: \n");
+    for (index, item) in todo_list
+            .iter()
+            .filter(|item| item.status == "pending")
+            .enumerate() {
+                let text= highlight_text(&item.desc);
+                if item.status == "done" {
+                    println!("{}.  ✅  {}", item.id, text);
+                } else {
+                    println!("{}.  ❌  {}", item.id, text);
+                }
+            }
 }
 
 #[cfg(test)]

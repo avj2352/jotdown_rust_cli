@@ -3,8 +3,32 @@
   "todos": [
     {
       "id": 1,
-      "desc": "PRUDENTIAL: Send email to Denise on few line on the portion of the new AWS enabled data platform @today",
+      "desc": "PRUDENTIAL: Send email to Denise on few line on the portion of the new AWS enabled data platform @important",
       "status": "pending",
+      "modified": "2023-09-25T13:00:04.792Z"
+    },
+    {
+      "id": 2,
+      "desc": "Crossings: Follow up with Giselle regarding furniture @today",
+      "status": "pending",
+      "modified": "2023-09-25T13:00:04.792Z"
+    },
+    {
+      "id": 3,
+      "desc": "Xfinity: Pay internet bill @today",
+      "status": "done",
+      "modified": "2023-09-25T13:00:04.792Z"
+    },
+    {
+      "id": 4,
+      "desc": "Crossings: Follow up regarding furniture @week",
+      "status": "pending",
+      "modified": "2023-09-25T13:00:04.792Z"
+    },
+    {
+      "id": 5,
+      "desc": "Timesheet: Send timesheet for Radha & Vikas approval @week",
+      "status": "done",
       "modified": "2023-09-25T13:00:04.792Z"
     }
   ],

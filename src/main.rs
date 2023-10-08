@@ -3,9 +3,11 @@ mod features;
 mod facade;
 
 use clap::{ command };
-// custom
+// features
 use features::list::gen_list_command;
-use facade::list_handler::handle_list_todo;
+// handlers
+use facade::list_handler::handle_list;
+use facade::help_handler::handle_help;
 
 const APP_DESCRIPTION: &str = "A modern Todo application with extra features!";
 const VERSION: &str = "0.1.03";
@@ -14,13 +16,19 @@ const VERSION: &str = "0.1.03";
 
 fn main() {
     // add commands
+    // override default help command
+    // implement default command as help command
     let cli_matches = command!()
         .about(APP_DESCRIPTION)
         .version(VERSION)
+        .override_help(handle_help())
         .subcommand(gen_list_command())
         .get_matches();
-    // match list
-    if let Some(matches) = cli_matches.subcommand_matches("list") {
-        handle_list_todo(matches);
+    // match commands with handlers
+    if let Some(matches) = cli_matches.subcommand_matches("ls") {
+        handle_list(matches);
+    } else {
+        // implement default handler as help
+        println!("{}", handle_help());
     }
 }
