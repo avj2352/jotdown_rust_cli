@@ -1,6 +1,6 @@
 # ✏️Jotdown - Todo CLI app using Rust
 
-![version](https://img.shields.io/badge/version-0.1.03-blue) [![Rust](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml/badge.svg)](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml)
+![version](https://img.shields.io/badge/version-0.4.01-blue) [![Rust](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml/badge.svg)](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml)
 
 - A modern Todo application with extra features!
 - I'd probably go with **Jotdown** until I get a better name!
@@ -66,37 +66,46 @@ cargo run -- --help
 
 ## Todo list (for the todo app to be complete 😅)
 
-### release 1.1.0
-- JOTDOWN initialize DB ...
-- JOTDOWN handle empty file ...
-- jd                                  Print todos ✅
-- jd help                             Lists the available commands ✅
-- jd ls                               Print all pending todo items ✅
-- jd ls                               Handle display if no todo items present ...
-- jd ls --todos                       Print all pending todo items ✅
-- jd ls --all                         Print completed and pending todo items ✅
-- jd ls --done                        Print completed todo items
-- jd add Go shopping                  Create a new todo item
-- jd ls @tag                          Print todo items containing "@tag"
-- jd ls ~@tag                         Print todo items not containing "@tag"
-- jd check 1                          Mark #1 as completed on todos
-- jd mv 1 42                          Change the id of given todo
-- jd rm 1                             Remove #1 item
-- jd renumber                         Re-numbers all todos starting with 1
-- jd clear                            Destroy all todo items
-- jd clear --done                     Destroy all completed todo items
+### release 0.1.1
+- JOTDOWN initialize DB ...✅
+- JOTDOWN handle empty file ...✅
+- jd                                             Print todos ...✅
+- jd help                                        Lists the available commands ...✅
+- jd ls                                          Print all pending todo items ...✅
+- jd ls                                          Handle display if no todo items present ...✅
+- jd ls --todos                                  Print all pending todo items ...✅
+- jd ls --all                                    Print completed and pending todo items ...✅
 
-### release 1.2.0
-- jd ls                               Print all pending todo items with their respective tasks (if any)
-- jd add -t 1 Get out of the house    Create a new task for todo item 1
-- jd check 1.1                        Mark task #1 as completed on todo #1   
+### release 0.1.2
+- jd ls --done                                   Print completed todo items ...
+- jd add Go shopping                             Create a new todo item ...
+- jd add Go shopping @annotate                   Create a new todo item with annotation ...
+- jd check 1                                     Mark #1 as completed on todos
+- jd mv 1 42                                     Change the id of given todo
+- jd rm 1                                        Remove #1 item
 
-### release 1.3.0
-- jd ls --reminder                    Print all reminder todos
-- jd add -g another_tag               Create a new tag by name "another_tag" and persist
-- jd add -r Go shopping               Create a new reminder item
-- jd undo 1                           Revert #1 to pending
-- jd sort "@important @high"          Sort Todos in the order of their tags as mentioned
+- jd renumber                                    Re-numbers all todos starting with 1
+- jd clear                                       Destroy all todo items
+- jd clear --done                                Destroy all completed todo items
+- jd ls @tag                                     Print todo items containing "@tag"
+- jd ls ~@tag                                    Print todo items not containing "@tag"
+
+### release 0.2.0
+- jd ls                                          Print all pending todo items with their respective tasks (if any)
+- jd add -t 1 Get out of the house               Create a new task for todo item 1
+- jd check 1.1                                   Mark task #1 as completed on todo #1   
+
+### release 0.3.0
+- jd ls --reminder                               Print all reminder todos
+- jd add -g another_tag                          Create a new tag by name "another_tag" and persist
+- jd add -r Go shopping                          Create a new reminder item
+- jd undo 1                                      Revert #1 to pending
+- jd sort "@important @high"                     Sort Todos in the order of their tags as mentioned
+
+### release 1.0.0 🏁
+- make crate / rust project executable
+- Add installation instructions
+- Make create / rust project scalable / easy to update
 
 ## Data structure (jotdown-db.json)
 
@@ -193,5 +202,40 @@ fn main() -> Result<()> {
     let hashmap: HashMap<String, String> = serde_json::from_reader(file)?;
     // Do something with the hashmap...
     Ok(())
+}
+```
+
+## Rust print line with a strikethrough
+
+There is no built-in way to print with strikethrough in Rust. However, there are a few workarounds.
+
+One workaround is to use the ANSI escape sequence for strikethrough. 
+The ANSI escape sequence for strikethrough is `\x9f`. 
+To use it, you can prefix the text you want to strikethrough with the `ANSI escape sequence`. 
+For example, the following code will print the text "Hello, world!" with strikethrough:
+
+```rust
+fn main() {
+  println!("\x9fHello, world!\x9f");
+}
+
+// ̶H̶e̶l̶l̶o̶,̶ ̶w̶o̶r̶l̶d̶!̶
+```
+
+Another workaround is to use a library such as `crossterm`. 
+The `crossterm` library provides a number of functions for controlling the terminal, 
+including a function for printing with `strikethrough`. To use the `crossterm` library to print with strikethrough, 
+you can use the following code:
+
+```rust
+use crossterm::terminal;
+
+fn main() {
+  terminal::enable_raw_mode().unwrap();
+  // Print the text "Hello, world!" with strikethrough.
+  terminal::emit_strikethrough().unwrap();
+  println!("Hello, world!");
+  terminal::emit_reset().unwrap();
+  terminal::disable_raw_mode().unwrap();
 }
 ```

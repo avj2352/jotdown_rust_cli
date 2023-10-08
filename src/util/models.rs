@@ -10,6 +10,17 @@ pub struct FileRequestResponse {
     pub tasks: Vec<Task>,
 }
 
+impl FileRequestResponse {
+    pub fn new() -> Self {
+        Self {
+            tags: vec![],
+            todos: vec![],
+            reminders: vec![],
+            tasks: vec![],
+        }
+    }
+}
+
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Todo {

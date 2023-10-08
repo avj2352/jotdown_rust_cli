@@ -1,5 +1,6 @@
 use clap::ArgMatches;
 use serde_json::from_str;
+use crate::util::display::display_empty_todo;
 // custom
 use crate::util::helpers::{highlight_text, read_file_from_path};
 use crate::util::models::{FileRequestResponse, Task, Todo};
@@ -40,7 +41,7 @@ pub fn parse_json_from_string(input: String) -> FileRequestResponse {
  * list all todos - pending & done
  * @returns {Vec<String>} task list
  */
-pub fn fetch_todo() -> Vec<Todo> {
+pub fn fetch_todos() -> Vec<Todo> {
     let json_string: String = read_file_from_path();
     let response = parse_json_from_string(json_string);
     response.todos
@@ -65,7 +66,12 @@ pub fn list_task() -> Vec<String> {
 * @param {&ArgMatches} args
 */
 pub fn list_all_todos() {
-    let todo_list: Vec<Todo> = fetch_todo();
+    let todo_list: Vec<Todo> = fetch_todos();
+    // guard check
+    if todo_list.len() == 0 {
+        println!("\n{}\n", display_empty_todo());
+        return ();
+    }
     println!("\n💡 Todos: \n");
     for (index, item) in todo_list
         .iter()
@@ -84,7 +90,12 @@ pub fn list_all_todos() {
  * @param {&ArgMatches} args
  */
 pub fn list_pending_todos() {
-    let todo_list: Vec<Todo> = fetch_todo();
+    let todo_list: Vec<Todo> = fetch_todos();
+    // guard check
+    if todo_list.len() == 0 {
+        println!("\n{}\n", display_empty_todo());
+        return ();
+    }
     println!("\n💡 Todos: \n");
     for (index, item) in todo_list
             .iter()

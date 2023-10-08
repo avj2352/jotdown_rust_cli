@@ -2,6 +2,7 @@ use std::io::{self, BufRead, Read};
 use std::fs::{self, File};
 use crate::util::config::get_db_file_path;
 use colored::Colorize;
+use crate::util::display::display_err_reading_file;
 use crate::util::enums::StatusColorType;
 
 /**
@@ -17,7 +18,7 @@ pub fn read_file_from_path() -> String {
     let file_path: String = get_db_file_path();
     let mut file: File = File::open(file_path).unwrap();
     let mut json_string: String = String::new();
-    file.read_to_string(&mut json_string).unwrap();
+    file.read_to_string(&mut json_string).expect(&*display_err_reading_file());
     json_string
 }
 
