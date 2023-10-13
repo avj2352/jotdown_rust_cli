@@ -1,4 +1,3 @@
-use clap::ArgMatches;
 /**
 * Help command handler ***********************************
 * consists of handlers for jotdown "help" subcommand

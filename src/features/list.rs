@@ -15,7 +15,8 @@ use clap::{ arg, ArgAction, Command };
 pub fn gen_list_command() -> Command {
     Command::new("ls")
         .about("lists all todos, tasks, reminders")
-        .arg(arg!(-t --todos "lists all todos").action(ArgAction::SetTrue))
+        .arg(arg!(-t --todos "lists pending todos").action(ArgAction::SetTrue))
         .arg(arg!(-a --all "lists all todos, tasks, reminders").action(ArgAction::SetTrue))
+        .arg(arg!(-d --done "lists completed todos").action(ArgAction::SetTrue))
         // .arg(arg!(-r --reminders "lists all reminders").action(ArgAction::SetTrue))
 }

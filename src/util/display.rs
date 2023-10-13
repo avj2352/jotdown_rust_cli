@@ -1,3 +1,4 @@
+use colored::Colorize;
 /**
 * Displays all terminal msgs / errors
 */
@@ -10,8 +11,14 @@ const ERR_READING_FILE: &str = r#"error reading file contents!"#;
 const ERR_WRITING_TO_FILE: &str = r#"error writing to the JSON file"#;
 const ERR_SERIALIZING_JSON: &str = r#"error serializing json file"#;
 
+const TODO_ADDED_MSG: &str = "✏️ Todo added...";
+
 fn display_msg(text: &str) -> String {
     format!("{}", text)
+}
+
+fn display_msg_success(text: String) -> String {
+    format!("{}", text.as_str().cyan().italic())
 }
 
 fn display_error(err_text: &str) -> String {
@@ -36,6 +43,10 @@ pub fn display_err_writing_to_file() -> String {
 
 pub fn display_err_reading_file() -> String {
     display_error(ERR_READING_FILE)
+}
+
+pub fn display_todo_added_msg() -> String {
+    display_msg_success(TODO_ADDED_MSG.to_string())
 }
 
 

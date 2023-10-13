@@ -77,9 +77,9 @@ cargo run -- --help
 - jd ls --all                                    Print completed and pending todo items ...✅
 
 ### release 0.1.2
-- jd ls --done                                   Print completed todo items ...
-- jd add Go shopping                             Create a new todo item ...
-- jd add Go shopping @annotate                   Create a new todo item with annotation ...
+- jd ls --done                                   Print completed todo items ...✅
+- jd add Go shopping                             Create a new todo item ...✅
+- jd add Go shopping @annotate                   Create a new todo item with annotation ...✅
 - jd check 1                                     Mark #1 as completed on todos
 - jd mv 1 42                                     Change the id of given todo
 - jd rm 1                                        Remove #1 item

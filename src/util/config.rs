@@ -13,6 +13,7 @@ const DB_JSON_FILE: &str = "jotdown-db.json";
 
 /**
 * initialize model if file is newly created
+* @params {&str} path
 */
 pub fn initialize_model_to_json(path: &str) {
     let new_model: FileRequestResponse = FileRequestResponse::new();

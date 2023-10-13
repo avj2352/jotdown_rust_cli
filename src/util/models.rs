@@ -19,6 +19,10 @@ impl FileRequestResponse {
             tasks: vec![],
         }
     }
+
+    pub fn update_todo_list(&mut self, record: Todo) {
+        self.todos.push(record);
+    }
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]

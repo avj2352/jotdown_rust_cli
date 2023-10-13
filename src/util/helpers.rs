@@ -1,9 +1,12 @@
 use std::io::{self, BufRead, Read};
 use std::fs::{self, File};
-use crate::util::config::get_db_file_path;
 use colored::Colorize;
+use chrono::{DateTime, Utc};
+// custom
+use crate::util::config::get_db_file_path;
 use crate::util::display::display_err_reading_file;
 use crate::util::enums::StatusColorType;
+
 
 /**
 * Helper methods ***********************************
@@ -75,6 +78,15 @@ pub fn highlight_text(text: &String) -> String {
     result
 }
 
+/**
+* return current date time in iso string format
+* @returns {String} current date in ISO string
+*/
+pub fn get_current_date_time_iso() -> String {
+    let now: DateTime<Utc> = Utc::now();
+    now.to_rfc3339()
+}
+
 
 // ******************* FOR INTERNAL TESTING PURPOSE *************
 
@@ -82,6 +94,7 @@ pub fn highlight_text(text: &String) -> String {
 * TESTING: Using BufReader for reading large files
 * FOR TESTING PURPOSE
 */
+#[allow(dead_code)]
 fn read_file_with_lines() -> Result<Vec<String>, String> {
     let source_json = "jotdown-db.json";
     let file:File = File::open(source_json).unwrap();
@@ -96,6 +109,7 @@ fn read_file_with_lines() -> Result<Vec<String>, String> {
  * TESTING: Using Vectors fith file reads
  * FOR TESTING PURPOSE
  */
+#[allow(dead_code)]
 fn return_lines_only_if_contains_string(test: &str) -> Result<Vec<String>, String> {
     let source_json = "jotdown-db.json";
     let file: String = fs::read_to_string(source_json).unwrap();
@@ -112,6 +126,7 @@ fn return_lines_only_if_contains_string(test: &str) -> Result<Vec<String>, Strin
 * TESTING: Trying out colorized util library
 * FOR TESTING PURPOSE ONLY
 */
+#[allow(dead_code)]
 fn colored_crate_features() {
     "this is blue".blue();
     "this is red".red();
