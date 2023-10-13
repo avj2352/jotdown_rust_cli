@@ -13,7 +13,7 @@ use crate::util::models::{FileRequestResponse, Todo};
  */
 
 fn create_todo(text: String) -> Todo {
-    let mut todos: Vec<Todo> = fetch_todos();
+    let todos: Vec<Todo> = fetch_todos();
     let count = todos.len();
     let record: Todo = Todo {
         id: (count + 1) as i64,
@@ -37,13 +37,6 @@ pub fn handle_add_todo (args: &ArgMatches) {
     model.update_todo_list(record);
     serialize_model_to_json(model);
     println!("{}", display_todo_added_msg());
-}
-
-/**
-* persist text to JSON
-*/
-fn write_to_json(text: String) {
-
 }
 
 

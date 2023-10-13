@@ -2,8 +2,8 @@ use clap::ArgMatches;
 use crate::dao::read_json::fetch_todos;
 use crate::util::display::display_empty_todo;
 // custom
-use crate::util::helpers::{highlight_text, read_file_from_path};
-use crate::util::models::{FileRequestResponse, Todo};
+use crate::util::helpers::highlight_text;
+use crate::util::models::Todo;
 /**
 * List command handler ***********************************
 * consists of handlers for jotdown "ls" subcommand

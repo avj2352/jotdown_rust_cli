@@ -1,4 +1,4 @@
-use clap::{ arg, ArgAction, Command };
+use clap::Command;
 /**
  * Consists of "jotdown" / "jd" - add command
  * ADD ==============================================================
