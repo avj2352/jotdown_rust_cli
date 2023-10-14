@@ -1,15 +1,42 @@
 use clap::{ Command };
 /**
 * Consists of "jotdown" / "jd" - miscellaneous commands
+* check command
+* undo command
 */
 
 /**
-* HELP command
-* jd help
+* CHECK command
+* mark a todo item as done
+* mark a task as done
+* mark a reminder as done
 * @returns {Command} returns subcommand
 */
-#[allow(dead_code)]
-pub fn gen_help_command() -> Command {
-    Command::new("help")
+pub fn gen_check_command() -> Command {
+    Command::new("check")
+        .about("mark as done - todo, task, reminder")
+        .arg(
+            clap::Arg::new("todo")
+                .index(1)
+        )
+    // TODO: add task and reminder commands here...
+}
+
+
+/**
+ * UNDO command
+ * mark a todo item back to pending
+ * mark a task as pending
+ * mark a reminder as pending
+ * @returns {Command} returns subcommand
+ */
+pub fn gen_undo_command() -> Command {
+    Command::new("undo")
+        .about("uncheck - todo, task, reminder")
+        .arg(
+            clap::Arg::new("todo")
+                .index(1)
+        )
+    // TODO: add task and reminder commands here...
 }
 

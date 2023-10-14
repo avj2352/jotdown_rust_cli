@@ -2,6 +2,7 @@ use clap::ArgMatches;
 use crate::dao::read_json::{fetch_todos, parse_json_from_string};
 use crate::dao::write_json::serialize_model_to_json;
 use crate::util::display::display_todo_added_msg;
+use crate::util::enums::TodoStatusType;
 use crate::util::helpers::{get_current_date_time_iso, read_file_from_path};
 // custom
 use crate::util::models::{FileRequestResponse, Todo};
@@ -18,7 +19,7 @@ fn create_todo(text: String) -> Todo {
     let record: Todo = Todo {
         id: (count + 1) as i64,
         desc: text.to_string(),
-        status: "pending".to_string(),
+        status: TodoStatusType::Pending.to_string(),
         modified: get_current_date_time_iso()
     };
     record

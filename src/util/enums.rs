@@ -24,6 +24,12 @@ pub enum ReminderType {
     Hourly,
 }
 
+#[derive(Debug)]
+pub enum IntFloat {
+    Int(i32),
+    Float(f64)
+}
+
 
 
 /// Emoji map for todo status - pending, done
@@ -31,6 +37,15 @@ pub enum ReminderType {
 pub enum TodoStatusType {
     Pending,
     Done
+}
+
+impl TodoStatusType {
+    pub fn to_string(&self) -> String {
+        return match self {
+            TodoStatusType::Pending => format!("{}", "pending"),
+            TodoStatusType::Done => format!("{}", "done")
+        }
+    }
 }
 
 // Enum for Colorizing

@@ -1,12 +1,85 @@
 use std::io::{self, BufRead, Read};
 use std::fs::{self, File};
+use std::f64;
 use colored::Colorize;
 use chrono::{DateTime, Utc};
+use regex::Regex;
 // custom
 use crate::util::config::get_db_file_path;
 use crate::util::display::display_err_reading_file;
-use crate::util::enums::StatusColorType;
+use crate::util::enums::{IntFloat, StatusColorType};
 
+// ******************* INTERNAL FUNCTIONS *************
+/**
+ * Function to check if the float point number has just one decimal place
+ * @params {f64} input float number
+ * @returns {bool} is float point number or not
+ */
+fn is_float_with_single_digit_decimal_places(num: f64) -> bool {
+    let regex = Regex::new(r"^-?\d+\.\d$").unwrap();
+    regex.is_match(num.to_string().as_str())
+}
+
+/**
+ * TESTING: Using BufReader for reading large files
+ * FOR TESTING PURPOSE
+ */
+#[allow(dead_code)]
+fn read_file_with_lines() -> Result<Vec<String>, String> {
+    let source_json = "jotdown-db.json";
+    let file:File = File::open(source_json).unwrap();
+    // another approach - using io::BufReader for large files
+    let reader = io::BufReader::new(file);
+    let result: Vec<String> = reader.lines().into_iter()
+        .map(|item| item.unwrap()).collect();
+    Ok(result)
+}
+
+/**
+ * TESTING: Using Vectors fith file reads
+ * FOR TESTING PURPOSE
+ */
+#[allow(dead_code)]
+fn return_lines_only_if_contains_string(test: &str) -> Result<Vec<String>, String> {
+    let source_json = "jotdown-db.json";
+    let file: String = fs::read_to_string(source_json).unwrap();
+    let mut results: Vec<String> = Vec::new();
+    for line in file.lines() {
+        if line.contains(test) {
+            results.push(line.to_string());
+        }
+    }
+    Ok(results)
+}
+
+/**
+ * TESTING: Trying out colorized util library
+ * FOR TESTING PURPOSE ONLY
+ */
+#[allow(dead_code)]
+fn colored_crate_features() {
+    "this is blue".blue();
+    "this is red".red();
+    "this is red on blue".red().on_blue();
+    "this is also red on blue".on_blue().red();
+    "you can use truecolor values too!".truecolor(0, 255, 136);
+    "background truecolor also works :)".on_truecolor(135, 28, 167);
+    "you can also make bold comments".bold();
+    println!("{} {} {}", "or use".cyan(), "any".italic().yellow(), "string type".cyan());
+    "or change advice. This is red".yellow().blue().red();
+    "or clear things up. This is default color and style".red().bold().clear();
+    "purple and magenta are the same".purple().magenta();
+    "bright colors are also allowed".bright_blue().on_bright_white();
+    "you can specify color by string".color("blue").on_color("red");
+    "and so are normal and clear".normal().clear();
+    String::from("this also works!").green().bold();
+    let result: String = format!("{}", "format works as expected. This will be padded".on_truecolor(135, 28, 167));
+    let output: String = format!("{}", "and this will be green but truncated to 3 chars".red().bold().clear());
+    println!("{}", result);
+    println!("{}", output);
+}
+
+// ******************* PUBLIC FUNCTIONS *************
 
 /**
 * Helper methods ***********************************
@@ -87,67 +160,45 @@ pub fn get_current_date_time_iso() -> String {
     now.to_rfc3339()
 }
 
-
-// ******************* FOR INTERNAL TESTING PURPOSE *************
-
 /**
-* TESTING: Using BufReader for reading large files
-* FOR TESTING PURPOSE
+*
 */
-#[allow(dead_code)]
-fn read_file_with_lines() -> Result<Vec<String>, String> {
-    let source_json = "jotdown-db.json";
-    let file:File = File::open(source_json).unwrap();
-    // another approach - using io::BufReader for large files
-    let reader = io::BufReader::new(file);
-    let result: Vec<String> = reader.lines().into_iter()
-                                .map(|item| item.unwrap()).collect();
-    Ok(result)
-}
+pub fn check_string_is_i32_or_f64(string: &str) -> Option<IntFloat> {
 
-/**
- * TESTING: Using Vectors fith file reads
- * FOR TESTING PURPOSE
- */
-#[allow(dead_code)]
-fn return_lines_only_if_contains_string(test: &str) -> Result<Vec<String>, String> {
-    let source_json = "jotdown-db.json";
-    let file: String = fs::read_to_string(source_json).unwrap();
-    let mut results: Vec<String> = Vec::new();
-    for line in file.lines() {
-        if line.contains(test) {
-            results.push(line.to_string());
+    if let Ok(i32_value) = string.parse::<i32>() {
+        return Some(IntFloat::Int(i32_value));
+    }
+    if let Ok(f64_value) = string.parse::<f64>() {
+        if is_float_with_single_digit_decimal_places(f64_value) {
+            return Some(IntFloat::Float(f64_value));
+        } else {
+            return None
         }
     }
-    Ok(results)
+    None
 }
 
 /**
-* TESTING: Trying out colorized util library
-* FOR TESTING PURPOSE ONLY
-*/
-#[allow(dead_code)]
-fn colored_crate_features() {
-    "this is blue".blue();
-    "this is red".red();
-    "this is red on blue".red().on_blue();
-    "this is also red on blue".on_blue().red();
-    "you can use truecolor values too!".truecolor(0, 255, 136);
-    "background truecolor also works :)".on_truecolor(135, 28, 167);
-    "you can also make bold comments".bold();
-    println!("{} {} {}", "or use".cyan(), "any".italic().yellow(), "string type".cyan());
-    "or change advice. This is red".yellow().blue().red();
-    "or clear things up. This is default color and style".red().bold().clear();
-    "purple and magenta are the same".purple().magenta();
-    "bright colors are also allowed".bright_blue().on_bright_white();
-    "you can specify color by string".color("blue").on_color("red");
-    "and so are normal and clear".normal().clear();
-    String::from("this also works!").green().bold();
-    let result: String = format!("{}", "format works as expected. This will be padded".on_truecolor(135, 28, 167));
-    let output: String = format!("{}", "and this will be green but truncated to 3 chars".red().bold().clear());
-    println!("{}", result);
-    println!("{}", output);
+ * function to retrieve left hand side real number of a float
+ * @params {f64} input number
+ * @returns {i32} result int number
+ */
+pub fn floor_of_a_number(number: f64) -> i32 {
+    number.trunc() as i32
 }
+
+/**
+* function to get fractional number of a float
+* @params {f64} input fraction number
+* @returns {i32} integar decimal number
+*/
+pub fn get_fractional_number(flt_val: f64) -> i32 {
+    let result = (flt_val - flt_val.floor()) * 10.0;
+    result.floor() as i32
+}
+
+
+
 
 
 
@@ -209,5 +260,40 @@ mod tests {
         let result = highlight_text(&input);
         println!("highlighted text: {}", &result);
         // assert_eq!(input, result);
+    }
+
+    #[test]
+    fn test_is_float_with_single_digit_decimal_places_returns_false() {
+        let input: f64 = 1.04;
+        let result = is_float_with_single_digit_decimal_places(input);
+        assert_eq!(result, false);
+    }
+
+    #[test]
+    fn test_is_float_with_single_digit_decimal_places_returns_true() {
+        let input: f64 = 1.1;
+        let result = is_float_with_single_digit_decimal_places(input);
+        assert_eq!(result, true);
+    }
+
+    #[test]
+    fn test_left_hand_side_of_float_as_int() {
+        let exp = 2;
+        let result = floor_of_a_number(2.5);
+        assert_eq!(result, exp);
+    }
+
+    #[test]
+    fn test_get_fractional_number() {
+        let exp: i32 = 5;
+        let result = get_fractional_number(2.5);
+        assert_eq!(result, exp);
+    }
+
+    #[test]
+    fn test_get_fractional_number_two() {
+        let exp: i32 = 9;
+        let result = get_fractional_number(2.9);
+        assert_eq!(result, exp);
     }
 }

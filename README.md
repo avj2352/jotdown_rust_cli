@@ -80,7 +80,8 @@ cargo run -- --help
 - jd ls --done                                   Print completed todo items ...✅
 - jd add Go shopping                             Create a new todo item ...✅
 - jd add Go shopping @annotate                   Create a new todo item with annotation ...✅
-- jd check 1                                     Mark #1 as completed on todos
+- jd check 1                                     Mark #1 as completed on todos ...✅
+- jd undo 1                                      Revert #1 to pending ...✅
 - jd mv 1 42                                     Change the id of given todo
 - jd rm 1                                        Remove #1 item
 
@@ -99,7 +100,6 @@ cargo run -- --help
 - jd ls --reminder                               Print all reminder todos
 - jd add -g another_tag                          Create a new tag by name "another_tag" and persist
 - jd add -r Go shopping                          Create a new reminder item
-- jd undo 1                                      Revert #1 to pending
 - jd sort "@important @high"                     Sort Todos in the order of their tags as mentioned
 
 ### release 1.0.0 🏁

@@ -1,6 +1,7 @@
 use clap::ArgMatches;
 use crate::dao::read_json::fetch_todos;
 use crate::util::display::display_empty_todo;
+use crate::util::enums::TodoStatusType;
 // custom
 use crate::util::helpers::highlight_text;
 use crate::util::models::Todo;
@@ -44,7 +45,7 @@ fn list_all_todos() {
         .iter()
         .enumerate() {
             let text= highlight_text(&item.desc);
-            if item.status == "done" {
+            if item.status == TodoStatusType::Done.to_string() {
                 println!("{}.  ✅  {}", item.id, text);
             } else {
                 println!("{}.  ❌  {}", item.id, text);
