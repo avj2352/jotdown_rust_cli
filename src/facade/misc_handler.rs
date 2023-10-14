@@ -1,3 +1,4 @@
+use std::fmt::Display;
 use clap::ArgMatches;
 use crate::dao::read_json::{fetch_todos, parse_json_from_string};
 use crate::dao::write_json::serialize_model_to_json;
@@ -43,7 +44,7 @@ fn retrieve_todos_guard_check_index(idx: i32) -> Result<Vec<Todo>, String> {
 fn mark_todo_item_in_list(list: Vec<Todo>, idx: i32, status: TodoStatusType) -> Vec<Todo> {
     let new_list = list.into_iter().map(|mut item| {
         if item.id == idx as i64 {
-            item.status = status.to_string();
+            item.status = format!("{}",status);
             item.modified = get_current_date_time_iso();
         }
         return item;
@@ -60,6 +61,7 @@ fn serialize_todos_to_json(list: Vec<Todo>) -> Result<(), String> {
     let json_string: String = read_file_from_path();
     let mut model: FileRequestResponse = parse_json_from_string(json_string);
     model.todos = list;
+    serialize_model_to_json(model);
     Ok(())
 }
 

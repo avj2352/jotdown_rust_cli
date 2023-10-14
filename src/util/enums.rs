@@ -1,3 +1,4 @@
+use std::fmt::{Display, Formatter};
 use serde::{Deserialize, Serialize};
 use colored::Colorize;
 
@@ -39,11 +40,11 @@ pub enum TodoStatusType {
     Done
 }
 
-impl TodoStatusType {
-    pub fn to_string(&self) -> String {
+impl Display for TodoStatusType {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         return match self {
-            TodoStatusType::Pending => format!("{}", "pending"),
-            TodoStatusType::Done => format!("{}", "done")
+            TodoStatusType::Pending => write!(f, "pending"),
+            TodoStatusType::Done => write!(f, "done")
         }
     }
 }
