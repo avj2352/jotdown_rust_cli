@@ -1,5 +1,12 @@
 # Jotdown
 
+## version 0.5.00
+- 10/15/2023
+- Completed move, add, remove features
+- Fixed bug - check and cancel icons change icon
+- unit testing
+- updated README.md
+
 ## version 0.1.03
 - 10/07/2023
 - Completed list subcommand

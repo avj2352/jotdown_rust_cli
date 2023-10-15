@@ -2,3 +2,7 @@
 .idea/
 .intellij/
 target/
+
+#ignore files
+.DS_Store
+*/.DS_Store

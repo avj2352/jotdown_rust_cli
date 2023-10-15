@@ -15,6 +15,8 @@ const ERROR_INVALID_ARGUMENT: &str = "Invalid Argument!";
 const TODO_ITEM_CHECKED: &str = "Todo item marked as done!";
 const TODO_ITEM_PENDING: &str = "Todo item reverted to pending!";
 
+const TODO_ITEM_MOVED: &str = "Todo item moved!";
+
 fn display_msg(text: &str) -> String {
     format!("{}", text)
 }
@@ -56,4 +58,6 @@ pub fn display_err_invalid_argument() -> String { display_error(ERROR_INVALID_AR
 pub fn display_todo_item_checked() -> String { display_msg_success(TODO_ITEM_CHECKED.to_string())}
 
 pub fn display_todo_item_pending() -> String { display_msg_success(TODO_ITEM_PENDING.to_string())}
+
+pub fn display_todo_item_moved() -> String { display_msg_success(TODO_ITEM_MOVED.to_string())}
 

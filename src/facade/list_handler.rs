@@ -1,4 +1,5 @@
 use clap::ArgMatches;
+use colored::Colorize;
 use crate::dao::read_json::fetch_todos;
 use crate::util::display::display_empty_todo;
 use crate::util::enums::TodoStatusType;
@@ -46,9 +47,9 @@ fn list_all_todos() {
         .enumerate() {
             let text= highlight_text(&item.desc);
             if item.status == TodoStatusType::Done.to_string() {
-                println!("{}.  ✅  {}", item.id, text);
+                println!("{}.  {}  {}", item.id, "✓".green().bold(), text);
             } else {
-                println!("{}.  ❌  {}", item.id, text);
+                println!("{}.  {}  {}", item.id, "✖".red().bold(), text);
             }
         }
 }
@@ -70,7 +71,7 @@ fn list_pending_todos() {
             .filter(|item| item.status == "pending")
             .enumerate() {
                 let text= highlight_text(&item.desc);
-                println!("{}.  ❌  {}", item.id, text);
+                println!("{}.  {}  {}", item.id, "✖".red().bold(), text);
 
             }
 }
@@ -92,7 +93,7 @@ fn list_completed_todos() {
         .filter(|item| item.status == "done")
         .enumerate() {
         let text= highlight_text(&item.desc);
-        println!("{}.  ✅  {}", item.id, text);
+        println!("{}.  {}  {}", item.id, "✓".green().bold(), text);
     }
 }
 

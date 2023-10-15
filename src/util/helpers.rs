@@ -183,6 +183,7 @@ pub fn check_string_is_i32_or_f64(string: &str) -> Option<IntFloat> {
  * @params {f64} input number
  * @returns {i32} result int number
  */
+#[allow(dead_code)]
 pub fn floor_of_a_number(number: f64) -> i32 {
     number.trunc() as i32
 }
@@ -192,6 +193,7 @@ pub fn floor_of_a_number(number: f64) -> i32 {
 * @params {f64} input fraction number
 * @returns {i32} integar decimal number
 */
+#[allow(dead_code)]
 pub fn get_fractional_number(flt_val: f64) -> i32 {
     let result = (flt_val - flt_val.floor()) * 10.0;
     result.floor() as i32

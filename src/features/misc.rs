@@ -40,3 +40,21 @@ pub fn gen_undo_command() -> Command {
     // TODO: add task and reminder commands here...
 }
 
+/**
+ * MOVE command
+ * move a todo task reminder item up / down the list
+ * @returns {Command} returns subcommand
+*/
+pub fn gen_move_command() -> Command {
+    Command::new("mv")
+        .about("move task [start] [destination]")
+        .arg(
+            clap::Arg::new("start")
+                .index(1)
+        )
+        .arg(
+            clap::Arg::new("end")
+                .index(2)
+        )
+}
+
