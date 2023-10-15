@@ -65,7 +65,9 @@ Jotdown CLI features -
 cargo run -- --help
 ```
 
-## 🏁Complete feature list - with status (for my todo cli app to be complete) 🏁
+## 🏁Complete feature list - with status 🏁
+
+..for my todo cli app to be complete 😎
 
 ```bash
 ### release 0.1.1
