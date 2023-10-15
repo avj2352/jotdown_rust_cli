@@ -1,7 +1,7 @@
 use clap::ArgMatches;
 use colored::Colorize;
 use crate::dao::read_json::fetch_todos;
-use crate::util::display::display_empty_todo;
+use crate::util::display::{display_empty_todo, display_todo_header};
 use crate::util::enums::TodoStatusType;
 // custom
 use crate::util::helpers::highlight_text;
@@ -41,15 +41,15 @@ fn list_all_todos() {
         println!("\n{}\n", display_empty_todo());
         return ();
     }
-    println!("\n💡 Todos: \n");
+    println!("{}",display_todo_header());
     for (_, item) in todo_list
         .iter()
         .enumerate() {
             let text= highlight_text(&item.desc);
             if item.status == TodoStatusType::Done.to_string() {
-                println!("{}.  {}  {}", item.id, "✓".green().bold(), text);
+                println!("{}.\t{}  {}", item.id, "✓".green().bold(), text);
             } else {
-                println!("{}.  {}  {}", item.id, "✖".red().bold(), text);
+                println!("{}.\t{}  {}", item.id, "✖".red().bold(), text);
             }
         }
 }
@@ -65,13 +65,13 @@ fn list_pending_todos() {
         println!("\n{}\n", display_empty_todo());
         return ();
     }
-    println!("\n💡 Todos: \n");
+    println!("{}",display_todo_header());
     for (_, item) in todo_list
             .iter()
             .filter(|item| item.status == "pending")
             .enumerate() {
                 let text= highlight_text(&item.desc);
-                println!("{}.  {}  {}", item.id, "✖".red().bold(), text);
+                println!("{}.\t{}  {}", item.id, "✖".red().bold(), text);
 
             }
 }
@@ -87,13 +87,13 @@ fn list_completed_todos() {
         println!("\n{}\n", display_empty_todo());
         return ();
     }
-    println!("\n💡 Todos: \n");
+    println!("{}",display_todo_header());
     for (_, item) in todo_list
         .iter()
         .filter(|item| item.status == "done")
         .enumerate() {
         let text= highlight_text(&item.desc);
-        println!("{}.  {}  {}", item.id, "✓".green().bold(), text);
+        println!("{}.\t{}  {}", item.id, "✓".green().bold(), text);
     }
 }
 

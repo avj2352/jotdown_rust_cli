@@ -5,12 +5,11 @@ use colored::Colorize;
 
 // info msgs
 const EMPTY_TODO_LIST: &str = r#"🏁 There are no TODOS, please create a new TODO task or refer to the docs --help 🏁"#;
-
 // error msgs
 const ERR_READING_FILE: &str = r#"error reading file contents!"#;
 const ERR_WRITING_TO_FILE: &str = r#"error writing to the JSON file"#;
 const ERR_SERIALIZING_JSON: &str = r#"error serializing json file"#;
-const TODO_ADDED_MSG: &str = "✏️ Todo added...";
+const TODO_ADDED_MSG: &str = "Todo added...";
 const ERROR_INVALID_ARGUMENT: &str = "Invalid Argument!";
 const TODO_ITEM_CHECKED: &str = "Todo item marked as done!";
 const TODO_ITEM_PENDING: &str = "Todo item reverted to pending!";
@@ -63,3 +62,5 @@ pub fn display_todo_item_pending() -> String { display_msg_success(TODO_ITEM_PEN
 pub fn display_todo_item_moved() -> String { display_msg_success(TODO_ITEM_MOVED.to_string())}
 
 pub fn display_todo_item_removed() -> String { display_msg_success(TODO_ITEM_REMOVED.to_string())}
+
+pub fn display_todo_header() -> String { format!("{}", "\n✏️ Todos: \n".cyan().bold()) }
