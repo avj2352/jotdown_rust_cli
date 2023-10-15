@@ -1,7 +1,12 @@
 use clap::ArgMatches;
 use crate::dao::read_json::{fetch_todos, parse_json_from_string};
 use crate::dao::write_json::serialize_model_to_json;
-use crate::util::display::{display_err_invalid_argument, display_todo_item_checked, display_todo_item_moved, display_todo_item_pending};
+use crate::util::display::{
+    display_err_invalid_argument,
+    display_todo_item_checked,
+    display_todo_item_moved,
+    display_todo_item_pending,
+    display_todo_item_removed};
 use crate::util::enums::{IntFloat, TodoStatusType};
 use crate::util::helpers::{check_string_is_i32_or_f64, get_current_date_time_iso, read_file_from_path};
 // custom
@@ -117,6 +122,24 @@ fn check_todo (num: i32) -> Result<(), String> {
  * @params {i32} num
  * @returns {Result<(), Err<String>>} result enum
  */
+fn remove_todo (num: i32) -> Result<(), String> {
+    // ..retrieve todo from list
+    // ..check inbounds
+    let todos = retrieve_todos_guard_check_index(num)?;
+    // ..mark status as done
+    let new_todos = todos.into_iter().filter(|item| {
+        item.id != num as i64
+    }).collect();
+    // ..write to json file
+    serialize_todos_to_json(new_todos)?;
+    Ok(())
+}
+
+/**
+ * function to mark todo item as checked
+ * @params {i32} num
+ * @returns {Result<(), Err<String>>} result enum
+ */
 fn revert_todo (num: i32) -> Result<(), String> {
     // ..retrieve todo from list
     // ..check inbounds
@@ -209,3 +232,25 @@ pub fn handle_move_todo_task (args: &ArgMatches) {
     };
 }
 
+/**
+ * "remove todo, task item" subcommand handler
+ * @param {&ArgMatches} args
+ */
+pub fn handle_remove_todo_task (args: &ArgMatches) {
+    // check type
+    let argument = args.get_one::<String>("index").unwrap();
+    // println!("you entered: {}", argument);
+    if let Some(num) = check_string_is_i32_or_f64(argument) {
+        match num {
+            IntFloat::Int(int_val) => {
+                match remove_todo(int_val) {
+                    Ok(()) => println!("{}", display_todo_item_removed()),
+                    Err(val) => println!("Error! error removing todo item: {}", val)
+                }
+            },
+            IntFloat::Float(flt_val) => println!("You've entered a float: {}", flt_val)
+        }
+    } else {
+        println!("{}", display_err_invalid_argument());
+    }
+}

@@ -14,8 +14,9 @@ const TODO_ADDED_MSG: &str = "✏️ Todo added...";
 const ERROR_INVALID_ARGUMENT: &str = "Invalid Argument!";
 const TODO_ITEM_CHECKED: &str = "Todo item marked as done!";
 const TODO_ITEM_PENDING: &str = "Todo item reverted to pending!";
-
 const TODO_ITEM_MOVED: &str = "Todo item moved!";
+
+const TODO_ITEM_REMOVED: &str = "Todo item removed!";
 
 fn display_msg(text: &str) -> String {
     format!("{}", text)
@@ -61,3 +62,4 @@ pub fn display_todo_item_pending() -> String { display_msg_success(TODO_ITEM_PEN
 
 pub fn display_todo_item_moved() -> String { display_msg_success(TODO_ITEM_MOVED.to_string())}
 
+pub fn display_todo_item_removed() -> String { display_msg_success(TODO_ITEM_REMOVED.to_string())}

@@ -58,3 +58,17 @@ pub fn gen_move_command() -> Command {
         )
 }
 
+/**
+ * MOVE command
+ * move a todo task reminder item up / down the list
+ * @returns {Command} returns subcommand
+ */
+pub fn gen_remove_command() -> Command {
+    Command::new("rm")
+        .about("remove - todo, task, reminder")
+        .arg(
+            clap::Arg::new("index")
+                .index(1)
+        )
+}
+
