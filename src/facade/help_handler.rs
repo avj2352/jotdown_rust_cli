@@ -9,26 +9,26 @@ const HELP_TEXT: &'static str = r#"
 
     📖 Usage:
 
-    * jd                                  Print todos
-    * jd help                             Lists the available commands
-    * jd add Go shopping                  Create a new todo item
-    * jd add -r Go shopping               Create a new reminder item
-    * jd add -t 1 Get out of the house    Create a new task for todo item 1
-    * jd ls                               Print all pending todo items
-    * jd ls @tag                          Print todo items containing "@tag"
-    * jd ls ~@tag                         Print todo items not containing "@tag"
-    * jd ls --all                         Print completed and pending todo items
-    * jd ls --done                        Print completed todo items
-    * jd ls --reminder                    Print all reminder todos
-    * jd check 1                          Mark #1 as completed on todos
-    * jd check 1.1                        Mark task #1 as completed on todo #1
-    * jd mv 1 42                          Change the id of given todo
-    * jd undo 1                           Revert #1 to pending
-    * jd rm 1                             Remove #1 item
-    * jd clear                            Destroy all todo items
-    * jd clear --done                     Destroy all completed todo items
-    * jd renumber                         Re-numbers all todos starting with 1
-    * jd sort "@important @high"          Sort Todos in the order of their tags as mentioned
+    * jotdown                                  Print todos
+    * jotdown help                             Lists the available commands
+    * jotdown add Go shopping                  Create a new todo item
+    * jotdown add -r Go shopping               Create a new reminder item
+    * jotdown add -t 1 Get out of the house    Create a new task for todo item 1
+    * jotdown ls                               Print all pending todo items
+    * jotdown ls @tag                          Print todo items containing "@tag"
+    * jotdown ls ~@tag                         Print todo items not containing "@tag"
+    * jotdown ls --all                         Print completed and pending todo items
+    * jotdown ls --done                        Print completed todo items
+    * jotdown ls --reminder                    Print all reminder todos
+    * jotdown check 1                          Mark #1 as completed on todos
+    * jotdown check 1.1                        Mark task #1 as completed on todo #1
+    * jotdown mv 1 42                          Change the id of given todo
+    * jotdown undo 1                           Revert #1 to pending
+    * jotdown rm 1                             Remove #1 item
+    * jotdown clear                            Destroy all todo items
+    * jotdown clear --done                     Destroy all completed todo items
+    * jotdown renumber                         Re-numbers all todos starting with 1
+    * jotdown sort "@important @high"          Sort Todos in the order of their tags as mentioned
 
   Environment variables:
 

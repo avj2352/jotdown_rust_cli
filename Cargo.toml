@@ -5,6 +5,10 @@ edition = "2021"
 description = "A modern Todo application with extra features"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[profile.release]
+strip = true  # Automatically strip symbols from the binary.
+opt-level = "z" # optimize for size
+codegen-units = 1
 
 [dependencies]
 clap = {version = "4.4.6", features = ["derive", "color", "help", "cargo"]}
@@ -13,5 +17,3 @@ serde_json = "1.0.107"
 serde_derive = "1.0.188"
 colored = "2.0.4"
 chrono = "0.4.31"
-rustc-serialize = "0.3.24"
-regex = "1.10.0"

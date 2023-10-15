@@ -3,7 +3,6 @@ use std::fs::{self, File};
 use std::f64;
 use colored::Colorize;
 use chrono::{DateTime, Utc};
-use regex::Regex;
 // custom
 use crate::util::config::get_db_file_path;
 use crate::util::display::display_err_reading_file;
@@ -15,9 +14,14 @@ use crate::util::enums::{IntFloat, StatusColorType};
  * @params {f64} input float number
  * @returns {bool} is float point number or not
  */
+
+// FIXME: Remove use of regex, do without regex
 fn is_float_with_single_digit_decimal_places(num: f64) -> bool {
-    let regex = Regex::new(r"^-?\d+\.\d$").unwrap();
-    regex.is_match(num.to_string().as_str())
+    // let regex = Regex::new(r"^-?\d+\.\d$").unwrap();
+    // regex.is_match(num.to_string().as_str())
+    let result = num - num.floor();
+    let digit = (result * 10.0) as i32;
+    digit > 0 && digit < 9
 }
 
 /**
@@ -274,6 +278,7 @@ mod tests {
     #[test]
     fn test_is_float_with_single_digit_decimal_places_returns_true() {
         let input: f64 = 1.1;
+        println!("Value is: {}", is_float_with_single_digit_decimal_places(input));
         let result = is_float_with_single_digit_decimal_places(input);
         assert_eq!(result, true);
     }
