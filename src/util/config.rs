@@ -1,14 +1,14 @@
 /**
 * Get db JSON file
 */
+use dirs;
 use std::fs::{File, write};
 use std::path::PathBuf;
 use crate::util::display::{display_err_serializing_json, display_err_writing_to_file};
 use crate::util::models::FileRequestResponse;
 
-// TODO: make db file location configurable
-const CURRENT_DIRECTORY: &str = ".";
-const DB_JSON_FILE: &str = "jotdown-db.json";
+// make db file location configurable (default - $HOME)
+const DB_JSON_FILE: &str = ".jotdown-db.json";
 
 
 /**
@@ -46,10 +46,11 @@ pub fn create_file_if_not_exists(path: &str) -> Result<bool, String> {
 pub fn get_db_file_path() -> String {
     let mut result: String = String::new();
     let mut path = PathBuf::new();
-    path.push(CURRENT_DIRECTORY);
+    let home_dir = dirs::home_dir().expect("Error getting home dir");
+    path.push(home_dir);
     path.push(DB_JSON_FILE);
     match path.to_str() {
-        None => {println!("Error")}
+        None => {println!("Error reading path to string")}
         Some(val) => {
             create_file_if_not_exists(val).unwrap();
             result = val.to_string();
@@ -64,7 +65,11 @@ mod tests {
 
     #[test]
     fn test_db_file_path() {
-        let expected_file_path = "./jotdown-db.json";
+        let mut path = PathBuf::new();
+        let home_dir = dirs::home_dir().expect("Error getting home dir");
+        path.push(home_dir);
+        path.push(".jotdown-db.json");
+        let expected_file_path = path.to_str().expect("Error getting path as string");
         let result = get_db_file_path();
         assert_eq!(expected_file_path, result.as_str());
     }

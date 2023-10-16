@@ -6,3 +6,4 @@ target/
 #ignore files
 .DS_Store
 */.DS_Store
+**/**/ui-*.sh

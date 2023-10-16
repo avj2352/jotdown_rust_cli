@@ -27,7 +27,7 @@ use crate::facade::misc_handler::{
 };
 
 const APP_DESCRIPTION: &str = "A modern Todo application with extra features!";
-const VERSION: &str = "0.5.00";
+const VERSION: &str = "0.5.01";
 
 
 
