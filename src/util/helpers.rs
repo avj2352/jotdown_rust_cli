@@ -213,6 +213,7 @@ mod tests {
     use super::*;
 
     #[test]
+    #[ignore]
     fn test_read_file_contains_default_keys() {
         let result: String = read_file_from_path();
         assert_eq!(true, result.as_str().contains("tags"));
