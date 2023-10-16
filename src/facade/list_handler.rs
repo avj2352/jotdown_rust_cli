@@ -97,21 +97,25 @@ fn list_completed_todos() {
     }
 }
 
+// TODO: to only run this test locally
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
+    #[ignore]
     fn test_list_all_todos() {
         println!("{:?}", list_all_todos());
     }
 
     #[test]
+    #[ignore]
     fn test_list_pending_todos() {
         println!("{:?}", list_pending_todos());
     }
 
     #[test]
+    #[ignore]
     fn test_list_completed_todos() {
         println!("{:?}", list_completed_todos());
     }
