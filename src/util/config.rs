@@ -63,7 +63,9 @@ pub fn get_db_file_path() -> String {
 mod tests {
     use super::*;
 
+    // TODO: to only run this test locally
     #[test]
+    #[ignore]
     fn test_db_file_path() {
         let mut path = PathBuf::new();
         let home_dir = dirs::home_dir().expect("Error getting home dir");

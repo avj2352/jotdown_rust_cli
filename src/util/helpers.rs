@@ -221,7 +221,9 @@ mod tests {
         assert_eq!(true, result.as_str().contains("reminders"));
     }
 
+    // TODO: to only run this test locally
     #[test]
+    #[ignore]
     fn test_read_file_into_strings_list() {
         let result: Vec<String> = read_file_with_lines().unwrap();
         assert_eq!(true, result.len() > 0);
