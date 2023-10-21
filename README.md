@@ -27,6 +27,10 @@
 - [Node JS Todo CLI](https://github.com/vesln/todo)
 - [How to include Rust CLI application to PATH](https://stackoverflow.com/questions/60944480/how-do-i-make-a-rust-program-which-can-be-executed-without-using-cargo-run)
 - [Optimize your Rust project release](https://github.com/johnthagen/min-sized-rust)
+- [Explore Microsoft Graph API SDK - Python](https://learn.microsoft.com/en-us/graph/sdks/sdk-installation?context=graph%2Fapi%2F1.0&view=graph-rest-1.0#install-the-microsoft-graph-javascript-sdk)
+- [Codecrafters - practical Rust projects](https://app.codecrafters.io/pay)
+- [Youtube - Jon Gjengset](https://www.youtube.com/watch?v=jf_ddGnum_4&t=864s)
+- [Github repo - Job Gjengset](https://github.com/jonhoo/codecrafters-bittorrent-rust)
 
 ## NOTE: About the file - .jotdown-db.json
 
@@ -109,13 +113,13 @@ cargo run -- --help
 - jd undo 1                                      Revert #1 to pending ...✅
 - jd mv 1 42                                     Change the id of given todo ...✅
 - jd rm 1                                        Remove #1 item ...✅
-
 - jd clear                                       Destroy all todo items
 - jd clear --done                                Destroy all completed todo items
-
-### release 1.2.0 (Introducing Tasks)
+- jd sort "@important @high"                     Sort Todos in the order of their tags as mentioned
 - jd ls @tag                                     Print todo items containing "@tag"
 - jd ls ~@tag                                    Print todo items not containing "@tag"
+
+### release 1.2.0 (Introducing Tasks)
 - jd ls                                          Print all pending todo items with their respective tasks (if any)
 - jd add -t 1 Get out of the house               Create a new task for todo item 1
 - jd check 1.1                                   Mark task #1 as completed on todo #1   
@@ -124,7 +128,6 @@ cargo run -- --help
 - jd ls --reminder                               Print all reminder todos
 - jd add -g another_tag                          Create a new tag by name "another_tag" and persist
 - jd add -r Go shopping                          Create a new reminder item
-- jd sort "@important @high"                     Sort Todos in the order of their tags as mentioned
 
 
 ### release 1.0.0 🏁
@@ -265,3 +268,11 @@ fn main() {
   terminal::disable_raw_mode().unwrap();
 }
 ```
+
+# Push Notification Features - Exploration
+## 1. OneSignal
+- [OneSignal documentation](https://documentation.onesignal.com/docs)
+## 2. Microsoft Graph API (Todo app)
+- [Microsoft Graph API](https://login.microsoftonline.com/common/oauth2/nativeclient)
+
+

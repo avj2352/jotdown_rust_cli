@@ -203,11 +203,6 @@ pub fn get_fractional_number(flt_val: f64) -> i32 {
     result.floor() as i32
 }
 
-
-
-
-
-
 #[cfg(test)]
 mod tests {
     use super::*;

@@ -9,6 +9,7 @@
 - Fixed bug - check and cancel icons change icon
 - unit testing
 - updated README.md
+- research on API calls to make - Microsoft, OneSignal
 
 ## version 0.1.03
 - 10/07/2023

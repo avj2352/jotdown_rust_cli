@@ -159,7 +159,6 @@ fn revert_todo (num: i32) -> Result<(), String> {
 pub fn handle_check_todo_task (args: &ArgMatches) {
     // check type
     let argument = args.get_one::<String>("todo").unwrap();
-    // println!("you entered: {}", argument);
     if let Some(num) = check_string_is_i32_or_f64(argument) {
         match num {
             IntFloat::Int(int_val) => {
@@ -182,7 +181,6 @@ pub fn handle_check_todo_task (args: &ArgMatches) {
 pub fn handle_revert_todo_task (args: &ArgMatches) {
     // check type
     let argument = args.get_one::<String>("todo").unwrap();
-    // println!("you entered: {}", argument);
     if let Some(num) = check_string_is_i32_or_f64(argument) {
         match num {
             IntFloat::Int(int_val) => {
@@ -239,7 +237,6 @@ pub fn handle_move_todo_task (args: &ArgMatches) {
 pub fn handle_remove_todo_task (args: &ArgMatches) {
     // check type
     let argument = args.get_one::<String>("index").unwrap();
-    // println!("you entered: {}", argument);
     if let Some(num) = check_string_is_i32_or_f64(argument) {
         match num {
             IntFloat::Int(int_val) => {
