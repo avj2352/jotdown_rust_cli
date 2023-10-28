@@ -1,6 +1,6 @@
 # ✏️Jotdown - Todo CLI app using Rust
 
-![version](https://img.shields.io/badge/version-0.5.00-blue) [![Rust](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml/badge.svg)](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml)
+![version](https://img.shields.io/badge/version-0.5.01-blue) [![Rust](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml/badge.svg)](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml)
 
 - A modern Todo application with extra features!
 - I'd probably go with **Jotdown** until I get a better name!
@@ -75,7 +75,7 @@ Jotdown CLI features -
     * jd rm 1                             Remove #1 item
     * jd clear                            Destroy all todo items
     * jd clear --done                     Destroy all completed todo items
-    * jd renumber                         Re-numbers all todos starting with 1
+    * jd renumber --todos                 Re-numbers all todos starting with 1
     * jd sort "@important @high"          Sort Todos in the order of their tags as mentioned
 
   Environment variables:
@@ -113,8 +113,9 @@ cargo run -- --help
 - jd undo 1                                      Revert #1 to pending ...✅
 - jd mv 1 42                                     Change the id of given todo ...✅
 - jd rm 1                                        Remove #1 item ...✅
-- jd clear                                       Destroy all todo items
-- jd clear --done                                Destroy all completed todo items
+- jd clear                                       Destroy all todo items ...✅
+- jd clear --done                                Destroy all completed todo items ...✅
+- jd renumber --todos                            Renumber pending todo items ...✅
 - jd sort "@important @high"                     Sort Todos in the order of their tags as mentioned
 - jd ls @tag                                     Print todo items containing "@tag"
 - jd ls ~@tag                                    Print todo items not containing "@tag"

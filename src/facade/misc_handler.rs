@@ -1,16 +1,11 @@
 use clap::ArgMatches;
-use crate::dao::read_json::{fetch_todos, parse_json_from_string};
-use crate::dao::write_json::serialize_model_to_json;
-use crate::util::display::{
-    display_err_invalid_argument,
-    display_todo_item_checked,
-    display_todo_item_moved,
-    display_todo_item_pending,
-    display_todo_item_removed};
+use crate::dao::read_json::{fetch_todos};
+use crate::dao::write_json::{serialize_todos_to_json};
+use crate::util::display::{display_err_invalid_argument, display_err_renumber_todos, display_renumber_todos, display_todo_item_checked, display_todo_item_moved, display_todo_item_pending, display_todo_item_removed};
 use crate::util::enums::{IntFloat, TodoStatusType};
-use crate::util::helpers::{check_string_is_i32_or_f64, get_current_date_time_iso, read_file_from_path};
+use crate::util::helpers::{check_string_is_i32_or_f64, get_current_date_time_iso};
 // custom
-use crate::util::models::{FileRequestResponse, Todo};
+use crate::util::models::{Todo};
 
 /**
 * Misc command handler ***********************************
@@ -87,19 +82,6 @@ fn mark_todo_item_in_list (list: Vec<Todo>, idx: i32, status: TodoStatusType) ->
     new_list
 }
 
-/**
- * serialize new todo list to JSON file
- * @params {Vec<Todo>} todo list
- * @returns {Result<(), String>}
- */
-fn serialize_todos_to_json (list: Vec<Todo>) -> Result<(), String> {
-    let json_string: String = read_file_from_path();
-    let mut model: FileRequestResponse = parse_json_from_string(json_string);
-    model.todos = list;
-    serialize_model_to_json(model);
-    Ok(())
-}
-
 
 /**
 * function to mark todo item as checked
@@ -147,6 +129,22 @@ fn revert_todo (num: i32) -> Result<(), String> {
     // ..mark status as pending
     let new_todos = mark_todo_item_in_list(todos, num, TodoStatusType::Pending);
     // ..write to json file
+    serialize_todos_to_json(new_todos)?;
+    Ok(())
+}
+
+/**
+* function to renumber todo items
+*/
+fn renumber_todos() -> Result<(), String> {
+    let todos = fetch_todos();
+    let new_todos = todos.into_iter()
+                                            .enumerate()
+                                            .map(|(idx, mut todo)| {
+                                                todo.id = (idx + 1) as i64;
+                                                return todo;
+                                            })
+                                            .collect();
     serialize_todos_to_json(new_todos)?;
     Ok(())
 }
@@ -249,5 +247,19 @@ pub fn handle_remove_todo_task (args: &ArgMatches) {
         }
     } else {
         println!("{}", display_err_invalid_argument());
+    }
+}
+
+/**
+* "renumber --todo"
+* Renumber the indices of pending todo, tasks, reminders
+* @param {&ArgMatches} args
+*/
+pub fn handle_renumber_todo_task_reminder (args: &ArgMatches) {
+    if args.get_flag("todos") {
+        match renumber_todos() {
+            Ok(()) => println!("{}", display_renumber_todos()),
+            Err(_) => println!("{}", display_err_renumber_todos())
+        }
     }
 }

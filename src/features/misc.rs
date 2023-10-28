@@ -1,4 +1,4 @@
-use clap::{ Command };
+use clap::{arg, ArgAction, Command};
 /**
 * Consists of "jotdown" / "jd" - miscellaneous commands
 * check command
@@ -72,3 +72,13 @@ pub fn gen_remove_command() -> Command {
         )
 }
 
+/**
+ * MOVE command
+ * move a todo task reminder item up / down the list
+ * @returns {Command} returns subcommand
+ */
+pub fn gen_renumber_command() -> Command {
+    Command::new("renumber")
+        .about("renumber - todos, task, reminder")
+        .arg(arg!(-t --todos "renumber pending todos").action(ArgAction::SetTrue))
+}

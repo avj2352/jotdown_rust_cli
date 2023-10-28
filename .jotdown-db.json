@@ -1,0 +1,55 @@
+{
+  "tags": [],
+  "todos": [
+    {
+      "id": 1,
+      "desc": "Complete remove, clear and sort features of Jotdown v1.0.0 @today",
+      "status": "pending",
+      "modified": "2023-10-16T13:19:39.629426+00:00"
+    },
+    {
+      "id": 2,
+      "desc": "Pamten: Send Timesheet to Pamten @today",
+      "status": "pending",
+      "modified": "2023-10-21T17:41:14.402359+00:00"
+    },
+    {
+      "id": 3,
+      "desc": "SHWETHA: Setup dietician appointment @week",
+      "status": "pending",
+      "modified": "2023-10-24T04:05:28.026791+00:00"
+    },
+    {
+      "id": 4,
+      "desc": "Transfer money to Nandkumar USD 200 @week",
+      "status": "pending",
+      "modified": "2023-10-16T13:15:59.964+00:00"
+    },
+    {
+      "id": 5,
+      "desc": "Prep for GDL test and give mock test online @week",
+      "status": "pending",
+      "modified": "2023-10-16T13:18:50.185219+00:00"
+    },
+    {
+      "id": 6,
+      "desc": "Malaysia - clear CC balance using School money @month",
+      "status": "pending",
+      "modified": "2023-10-20T07:32:17.312927+00:00"
+    },
+    {
+      "id": 7,
+      "desc": "Create ITIN for Shwetha @month",
+      "status": "pending",
+      "modified": "2023-10-16T18:12:51.752818+00:00"
+    },
+    {
+      "id": 8,
+      "desc": "SHWETHA: pay labcorp bill of $44.39 online @month",
+      "status": "pending",
+      "modified": "2023-10-20T06:15:09.323446+00:00"
+    }
+  ],
+  "reminders": [],
+  "tasks": []
+}

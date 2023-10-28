@@ -5,7 +5,11 @@
 - A modern Todo application with extra features!
 - I'd probably go with **Jotdown** until I get a better name!
 
-## 🚧 WORK IN PROGRESS 🚧
+## 🚨 RELEASE v1.0.0 available
+
+- Release executable `v1.0.0` available under `release` folder. 
+- Copy the executable or run the shell script `build_release.sh`
+- to generate the latest build (warning: using the shell script, generates a canary build)
 
 ## Todo synonyms, alternate names to the app
 
@@ -23,6 +27,25 @@
 - [Node JS Todo CLI](https://github.com/vesln/todo)
 - [How to include Rust CLI application to PATH](https://stackoverflow.com/questions/60944480/how-do-i-make-a-rust-program-which-can-be-executed-without-using-cargo-run)
 - [Optimize your Rust project release](https://github.com/johnthagen/min-sized-rust)
+- [Explore Microsoft Graph API SDK - Python](https://learn.microsoft.com/en-us/graph/sdks/sdk-installation?context=graph%2Fapi%2F1.0&view=graph-rest-1.0#install-the-microsoft-graph-javascript-sdk)
+- [Codecrafters - practical Rust projects](https://app.codecrafters.io/pay)
+- [Youtube - Jon Gjengset](https://www.youtube.com/watch?v=jf_ddGnum_4&t=864s)
+- [Github repo - Job Gjengset](https://github.com/jonhoo/codecrafters-bittorrent-rust)
+
+## NOTE: About the file - .jotdown-db.json
+
+Jotdown remembers your tasks, todos and reminders by persisting them under `$HOME/.jotdown-db.json`
+The default store of the JSON file is in $HOME location. This could vary based on the operating system:
+
+- Linux OS: $HOME = `/home/alice`
+- Windows OS: $HOME = `C:\Users\Alice`
+- Mac OS: $HOME = `/Users/Alice`
+
+> In the upcoming release 1.2.0 you can configure your own path to store `.jotdown-db.json`, by setting the env variable
+```bash
+# set datastore path
+JOTDOWN_DB_PATH=~/Dropbox/jotdown.json  Specify DB path [default: $HOME/.jotdown-db.json]
+```
 
 ## Run (using Cargo)
 
@@ -34,26 +57,26 @@ Jotdown CLI features -
 
   Usage:
 
-    jotdown                                  Print todos
-    jotdown help                             Lists the available commands
-    jotdown add Go shopping                  Create a new todo item
-    jotdown add -r Go shopping               Create a new reminder item
-    jotdown add -t 1 Get out of the house    Create a new task for todo item 1
-    jotdown ls                               Print all pending todo items
-    jotdown ls @tag                          Print todo items containing "@tag"
-    jotdown ls ~@tag                         Print todo items not containing "@tag"
-    jotdown ls --all                         Print completed and pending todo items
-    jotdown ls --done                        Print completed todo items
-    jotdown ls --reminder                    Print all reminder todos
-    jotdown check 1                          Mark #1 as completed on todos 
-    jotdown check 1.1                        Mark task #1 as completed on todo #1   
-    jotdown mv 1 42                          Change the id of given todo
-    jotdown undo 1                           Revert #1 to pending
-    jotdown rm 1                             Remove #1 item
-    jotdown clear                            Destroy all todo items
-    jotdown clear --done                     Destroy all completed todo items
-    jotdown renumber                         Re-numbers all todos starting with 1
-    jotdown sort "@important @high"          Sort Todos in the order of their tags as mentioned
+    * jd                                  (default) jd help - Lists the available commands
+    * jd help                             Lists the available commands
+    * jd add Go shopping                  Create a new todo item
+    * jd add -r Go shopping               Create a new reminder item
+    * jd add -t 1 Get out of the house    Create a new task for todo item 1
+    * jd ls                               Print all pending todo items
+    * jd ls --all                         Print completed and pending todo items
+    * jd ls --done                        Print completed todo items
+    * jd ls @tag                          Print todo items containing "@tag"
+    * jd ls ~@tag                         Print todo items not containing "@tag"
+    * jd ls --reminder                    Print all reminder todos
+    * jd check 1                          Mark #1 as completed on todos
+    * jd check 1.1                        Mark task #1 as completed on todo #1
+    * jd mv 1 42                          Change the id of given todo
+    * jd undo 1                           Revert #1 to pending
+    * jd rm 1                             Remove #1 item
+    * jd clear                            Destroy all todo items
+    * jd clear --done                     Destroy all completed todo items
+    * jd renumber                         Re-numbers all todos starting with 1
+    * jd sort "@important @high"          Sort Todos in the order of their tags as mentioned
 
   Environment variables:
 
@@ -74,38 +97,38 @@ cargo run -- --help
 ### release 0.1.1
 - JOTDOWN initialize DB ...✅
 - JOTDOWN handle empty file ...✅
-- jotdown                                             Print todos ...✅
-- jotdown help                                        Lists the available commands ...✅
-- jotdown ls                                          Print all pending todo items ...✅
-- jotdown ls                                          Handle display if no todo items present ...✅
-- jotdown ls --todos                                  Print all pending todo items ...✅
-- jotdown ls --all                                    Print completed and pending todo items ...✅
+- jd                                             Print todos ...✅
+- jd help                                        Lists the available commands ...✅
+- jd ls                                          Print all pending todo items ...✅
+- jd ls                                          Handle display if no todo items present ...✅
+- jd ls --todos                                  Print all pending todo items ...✅
+- jd ls --all                                    Print completed and pending todo items ...✅
 
-### release 1.0.0 (complete replacement of Node's todo cli 😎)
+## release 1.0.0 (complete replacement of Node's todo cli 😎)
 
-- jotdown ls --done                                   Print completed todo items ...✅
-- jotdown add Go shopping                             Create a new todo item ...✅
-- jotdown add Go shopping @annotate                   Create a new todo item with annotation ...✅
-- jotdown check 1                                     Mark #1 as completed on todos ...✅
-- jotdown undo 1                                      Revert #1 to pending ...✅
-- jotdown mv 1 42                                     Change the id of given todo ...✅
-- jotdown rm 1                                        Remove #1 item ...✅
-
-- jotdown clear                                       Destroy all todo items
-- jotdown clear --done                                Destroy all completed todo items
+- jd ls --done                                   Print completed todo items ...✅
+- jd add Go shopping                             Create a new todo item ...✅
+- jd add Go shopping @annotate                   Create a new todo item with annotation ...✅
+- jd check 1                                     Mark #1 as completed on todos ...✅
+- jd undo 1                                      Revert #1 to pending ...✅
+- jd mv 1 42                                     Change the id of given todo ...✅
+- jd rm 1                                        Remove #1 item ...✅
+- jd clear                                       Destroy all todo items
+- jd clear --done                                Destroy all completed todo items
+- jd sort "@important @high"                     Sort Todos in the order of their tags as mentioned
+- jd ls @tag                                     Print todo items containing "@tag"
+- jd ls ~@tag                                    Print todo items not containing "@tag"
 
 ### release 1.2.0 (Introducing Tasks)
-- jotdown ls @tag                                     Print todo items containing "@tag"
-- jotdown ls ~@tag                                    Print todo items not containing "@tag"
-- jotdown ls                                          Print all pending todo items with their respective tasks (if any)
-- jotdown add -t 1 Get out of the house               Create a new task for todo item 1
-- jotdown check 1.1                                   Mark task #1 as completed on todo #1   
+- jd ls                                          Print all pending todo items with their respective tasks (if any)
+- jd add -t 1 Get out of the house               Create a new task for todo item 1
+- jd check 1.1                                   Mark task #1 as completed on todo #1   
 
 ### release 1.3.0 (Introducing reminders)
-- jotdown ls --reminder                               Print all reminder todos
-- jotdown add -g another_tag                          Create a new tag by name "another_tag" and persist
-- jotdown add -r Go shopping                          Create a new reminder item
-- jotdown sort "@important @high"                     Sort Todos in the order of their tags as mentioned
+- jd ls --reminder                               Print all reminder todos
+- jd add -g another_tag                          Create a new tag by name "another_tag" and persist
+- jd add -r Go shopping                          Create a new reminder item
+
 
 ### release 1.0.0 🏁
 - make crate / rust project executable
@@ -245,3 +268,11 @@ fn main() {
   terminal::disable_raw_mode().unwrap();
 }
 ```
+
+# Push Notification Features - Exploration
+## 1. OneSignal
+- [OneSignal documentation](https://documentation.onesignal.com/docs)
+## 2. Microsoft Graph API (Todo app)
+- [Microsoft Graph API](https://login.microsoftonline.com/common/oauth2/nativeclient)
+
+

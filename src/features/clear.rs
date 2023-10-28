@@ -15,7 +15,7 @@ pub fn gen_clear_command() -> Command {
         .about("clear all todos, tasks, reminders")
         .arg(arg!(-t --todos "clear done todos").action(ArgAction::SetTrue))
         .arg(arg!(-a --all "clear all todos, tasks, reminders").action(ArgAction::SetTrue))
-        .arg(arg!(-d --done "clear done todos").action(ArgAction::SetTrue))
+        .arg(arg!(-d --done "clear done todos, tasks, reminders").action(ArgAction::SetTrue))
         .arg(arg!(-k --tasks "clear done tasks").action(ArgAction::SetTrue))
         .arg(arg!(-r --reminders "clear done reminders").action(ArgAction::SetTrue))
 }
