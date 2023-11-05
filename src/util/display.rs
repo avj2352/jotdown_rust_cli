@@ -65,6 +65,6 @@ pub fn display_todo_item_removed() -> String { display_msg_success(TODO_ITEM_REM
 
 pub fn display_todo_header() -> String { format!("{}", "\n ✏️ Todos: \n".cyan().bold()) }
 
-pub fn display_renumber_todos() -> String{ format!("{}", "Todo items renumbered!".cyan().italic()) }
+pub fn display_sort_todos() -> String{ format!("{}", "Todo items sorted!".cyan().italic()) }
 
-pub fn display_err_renumber_todos() -> String { format!("{}", "Error renumbering todos!!".red().bold())}
+pub fn display_err_sort_todos() -> String { format!("{}", "Error sorting todos!!".red().bold())}

@@ -1,4 +1,4 @@
-use clap::{arg, ArgAction, Command};
+use clap::{Command};
 /**
 * Consists of "jotdown" / "jd" - miscellaneous commands
 * check command
@@ -73,12 +73,16 @@ pub fn gen_remove_command() -> Command {
 }
 
 /**
- * MOVE command
- * move a todo task reminder item up / down the list
+ * SORT command
+ * sorts the list in the given order of tags if provided
+ * if no input provided, then sorts the list in a predefined order
  * @returns {Command} returns subcommand
  */
-pub fn gen_renumber_command() -> Command {
-    Command::new("renumber")
-        .about("renumber - todos, task, reminder")
-        .arg(arg!(-t --todos "renumber pending todos").action(ArgAction::SetTrue))
+pub fn gen_sort_command() -> Command {
+    Command::new("sort")
+        .about("sort - todo, task, reminder")
+        .arg(
+            clap::Arg::new("list_string")
+                .index(1)
+        )
 }

@@ -15,19 +15,14 @@ const HELP_TEXT: &'static str = r#"
     * jd add -r Go shopping               Create a new reminder item
     * jd add -t 1 Get out of the house    Create a new task for todo item 1
     * jd ls                               Print all pending todo items
-    * jd ls --all                         Print completed and pending todo items
-    * jd ls --done                        Print completed todo items
-    * jd ls @tag                          Print todo items containing "@tag"
-    * jd ls ~@tag                         Print todo items not containing "@tag"
-    * jd ls --reminder                    Print all reminder todos
+    * jd ls --todos                       Print completed and pending todo items
+    * jd ls --all                         Print all items
     * jd check 1                          Mark #1 as completed on todos
-    * jd check 1.1                        Mark task #1 as completed on todo #1
     * jd mv 1 42                          Change the id of given todo
     * jd undo 1                           Revert #1 to pending
     * jd rm 1                             Remove #1 item
     * jd clear                            Destroy all todo items
     * jd clear --done                     Destroy all completed todo items
-    * jd renumber                         Re-numbers all todos starting with 1
     * jd sort "@important @high"          Sort Todos in the order of their tags as mentioned
 
   Environment variables:

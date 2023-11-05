@@ -9,18 +9,14 @@ use util::config::get_db_file_path;
 // features
 use crate::features::list::gen_list_command;
 use crate::features::add::gen_add_command;
-use crate::features::misc::{gen_check_command, gen_move_command, gen_remove_command, gen_renumber_command, gen_undo_command};
+use crate::features::misc::{gen_check_command, gen_move_command, gen_remove_command, gen_sort_command, gen_undo_command};
 use crate::features::clear::gen_clear_command;
 // handlers
 use crate::facade::list_handler::handle_list;
 use crate::facade::help_handler::handle_help;
 use crate::facade::add_handler::handle_add_todo;
 use crate::facade::clear_handler::handle_clear_list;
-use crate::facade::misc_handler::{handle_check_todo_task,
-                                  handle_move_todo_task,
-                                  handle_remove_todo_task,
-                                  handle_renumber_todo_task_reminder,
-                                  handle_revert_todo_task};
+use crate::facade::misc_handler::{handle_check_todo_task, handle_move_todo_task, handle_remove_todo_task, handle_revert_todo_task, handle_sort_todo_reminder};
 
 const APP_DESCRIPTION: &str = "A modern Todo application with extra features!";
 const VERSION: &str = "0.5.01";
@@ -44,7 +40,7 @@ fn main() {
         .subcommand(gen_move_command())
         .subcommand(gen_remove_command())
         .subcommand(gen_clear_command())
-        .subcommand(gen_renumber_command())
+        .subcommand(gen_sort_command())
         .get_matches();
 
 
@@ -63,8 +59,8 @@ fn main() {
         handle_remove_todo_task(matches);
     } else if let Some(matches) = cli_matches.subcommand_matches("clear") {
         handle_clear_list(matches) ;
-    } else if let Some(matches) = cli_matches.subcommand_matches("renumber") {
-        handle_renumber_todo_task_reminder(matches);
+    }  else if let Some(matches) = cli_matches.subcommand_matches("sort") {
+        handle_sort_todo_reminder(matches);
     }
     else {
         // implement default handler as help

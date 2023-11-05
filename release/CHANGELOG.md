@@ -1,5 +1,19 @@
 # Jotdown
 
+## version 1.0.00
+- 11/05/2023
+- ✨Official release of version 1.0.0 ✨
+- Includes sort and notification features
+- Includes all features of todo node js cli application
+
+## version 0.5.01
+- 10/28/2023
+- 3 more features pending to make first release!
+- Completed clear command `jd clear --done`
+- Completed renumber command `jd renumber`
+- POC: Send push notification to Mobile using `ntfy.sh` curl command!!
+- Unit testing and refactoring
+
 ## version 0.5.00
 - 10/15/2023
 - Removed unused library crates - rustc-serializer and regex

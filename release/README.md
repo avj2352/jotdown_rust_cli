@@ -1,6 +1,6 @@
 # ✏️Jotdown - Todo CLI app using Rust
 
-![version](https://img.shields.io/badge/version-0.5.00-blue) [![Rust](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml/badge.svg)](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml)
+![version](https://img.shields.io/badge/version-1.0.00-blue) [![Rust](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml/badge.svg)](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml)
 
 - A modern Todo application with extra features!
 - I'd probably go with **Jotdown** until I get a better name!
@@ -31,6 +31,7 @@
 - [Codecrafters - practical Rust projects](https://app.codecrafters.io/pay)
 - [Youtube - Jon Gjengset](https://www.youtube.com/watch?v=jf_ddGnum_4&t=864s)
 - [Github repo - Job Gjengset](https://github.com/jonhoo/codecrafters-bittorrent-rust)
+- [Rust - All algorithms](https://github.com/TheAlgorithms/Rust)
 
 ## NOTE: About the file - .jotdown-db.json
 
@@ -63,19 +64,14 @@ Jotdown CLI features -
     * jd add -r Go shopping               Create a new reminder item
     * jd add -t 1 Get out of the house    Create a new task for todo item 1
     * jd ls                               Print all pending todo items
-    * jd ls --all                         Print completed and pending todo items
-    * jd ls --done                        Print completed todo items
-    * jd ls @tag                          Print todo items containing "@tag"
-    * jd ls ~@tag                         Print todo items not containing "@tag"
-    * jd ls --reminder                    Print all reminder todos
-    * jd check 1                          Mark #1 as completed on todos
-    * jd check 1.1                        Mark task #1 as completed on todo #1
+    * jd ls --todos                       Print completed and pending todo items
+    * jd ls --all                         Print all items        
+    * jd check 1                          Mark #1 as completed on todos    
     * jd mv 1 42                          Change the id of given todo
     * jd undo 1                           Revert #1 to pending
     * jd rm 1                             Remove #1 item
     * jd clear                            Destroy all todo items
-    * jd clear --done                     Destroy all completed todo items
-    * jd renumber                         Re-numbers all todos starting with 1
+    * jd clear --done                     Destroy all completed todo items    
     * jd sort "@important @high"          Sort Todos in the order of their tags as mentioned
 
   Environment variables:
@@ -113,13 +109,14 @@ cargo run -- --help
 - jd undo 1                                      Revert #1 to pending ...✅
 - jd mv 1 42                                     Change the id of given todo ...✅
 - jd rm 1                                        Remove #1 item ...✅
-- jd clear                                       Destroy all todo items
-- jd clear --done                                Destroy all completed todo items
-- jd sort "@important @high"                     Sort Todos in the order of their tags as mentioned
-- jd ls @tag                                     Print todo items containing "@tag"
-- jd ls ~@tag                                    Print todo items not containing "@tag"
+- jd clear                                       Destroy all todo items ...✅
+- jd clear --done                                Destroy all completed todo items ...✅
+- jd sort "@important @high"                     Sort Todos in the order of their tags as mentioned ...✅
 
 ### release 1.2.0 (Introducing Tasks)
+- jd ls @tag                                     Print todo items containing "@tag"
+- jd ls ~@tag                                    Print todo items not containing "@tag" 
+- jd update --t 5 "New sentence @week"           Edit todo #5 with new sentence 
 - jd ls                                          Print all pending todo items with their respective tasks (if any)
 - jd add -t 1 Get out of the house               Create a new task for todo item 1
 - jd check 1.1                                   Mark task #1 as completed on todo #1   

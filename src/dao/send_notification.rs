@@ -2,15 +2,14 @@
 * Push notifications to ntfy app
 * Subscribe to the alert - jotdown_alerts
 */
-use serde_json::Value;
-
-
+#[allow(dead_code)]
 const API_URL: &str = "https://ntfy.sh/jotdown_alert";
 /**
 * Async API call
 * send Push notification
 * API example https://ntfy.sh
 */
+#[allow(dead_code)]
 async fn send_notification(msg: &'static str) -> Result<serde_json::Value, reqwest::Error> {
     let client = reqwest::Client::new();
     let res = client.post(API_URL).body(msg).send().await?.json::<serde_json::Value>().await?;

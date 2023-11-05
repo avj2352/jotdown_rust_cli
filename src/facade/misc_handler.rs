@@ -1,7 +1,7 @@
 use clap::ArgMatches;
 use crate::dao::read_json::{fetch_todos};
 use crate::dao::write_json::{serialize_todos_to_json};
-use crate::util::display::{display_err_invalid_argument, display_err_renumber_todos, display_renumber_todos, display_todo_item_checked, display_todo_item_moved, display_todo_item_pending, display_todo_item_removed};
+use crate::util::display::{display_err_invalid_argument, display_err_sort_todos, display_sort_todos, display_todo_item_checked, display_todo_item_moved, display_todo_item_pending, display_todo_item_removed};
 use crate::util::enums::{IntFloat, TodoStatusType};
 use crate::util::helpers::{check_string_is_i32_or_f64, get_current_date_time_iso};
 // custom
@@ -134,17 +134,50 @@ fn revert_todo (num: i32) -> Result<(), String> {
 }
 
 /**
-* function to renumber todo items
+* function sort default order
+* sort the list in the following tag order -
+* @important, @today, @week, @month, @any
 */
-fn renumber_todos() -> Result<(), String> {
+fn filter_todos_by_text(todos: &Vec<Todo>, text: &str) -> Vec<Todo> {
+    todos.into_iter().filter(|item|
+        item.desc.contains(text)).cloned().collect()
+}
+
+fn filter_items_not_present_in_list(todos: &Vec<Todo>, text_list: Vec<&str>) -> Vec<Todo> {
+    todos.into_iter().filter(|item |
+        !text_list.iter().any(|s| item.desc.contains(s))).cloned().collect()
+}
+
+fn sort_default_order() -> Result<(), String> {
+    let tag_list = vec!["@important", "@today", "@week", "@month"];
+    let mut result: Vec<Todo> = Vec::new();
     let todos = fetch_todos();
-    let new_todos = todos.into_iter()
-                                            .enumerate()
-                                            .map(|(idx, mut todo)| {
-                                                todo.id = (idx + 1) as i64;
-                                                return todo;
-                                            })
-                                            .collect();
+    let important_todos = filter_todos_by_text(&todos, "@important");
+    let today_todos = filter_todos_by_text(&todos, "@today");
+    let week_todos = filter_todos_by_text(&todos, "@week");
+    let month_todos = filter_todos_by_text(&todos, "@month");
+    let list_misc_todos = filter_items_not_present_in_list(&todos, tag_list);
+    // TODO: filter out any other todo items with miscellaneous tags
+    for item in important_todos {
+        result.push(item);
+    }
+    for item in today_todos {
+        result.push(item);
+    }
+    for item in week_todos {
+        result.push(item);
+    }
+    for item in month_todos {
+        result.push(item);
+    }
+    for item in list_misc_todos {
+        result.push(item);
+    }
+    let new_todos: Vec<Todo> = result.into_iter().enumerate()
+        .map(|(idx, mut todo)| {
+            todo.id = (idx + 1) as i64;
+            return todo;
+        }).collect();
     serialize_todos_to_json(new_todos)?;
     Ok(())
 }
@@ -251,15 +284,37 @@ pub fn handle_remove_todo_task (args: &ArgMatches) {
 }
 
 /**
-* "renumber --todo"
-* Renumber the indices of pending todo, tasks, reminders
-* @param {&ArgMatches} args
+* "sort" / "sort '@important, @today, @week, @other'"
+* Sort the todo items in a predefined order / order provided by the user
+* @param {&ArgMatches} args <String>
 */
-pub fn handle_renumber_todo_task_reminder (args: &ArgMatches) {
-    if args.get_flag("todos") {
-        match renumber_todos() {
-            Ok(()) => println!("{}", display_renumber_todos()),
-            Err(_) => println!("{}", display_err_renumber_todos())
+pub fn handle_sort_todo_reminder(args: &ArgMatches) {
+    let argument = args.get_one::<String>("list_string");
+    match argument {
+        Some(_) => println!("sort input text provided....(Coming soon!)"),
+        None => {
+            match sort_default_order() {
+                Ok(()) => println!("{}",display_sort_todos()),
+                Err(_) => println!("{}",display_err_sort_todos())
+            }
         }
+    };
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_filter_items_not_present_in_list() {
+        let input_list: Vec<Todo> = vec![Todo {
+            id: 1,
+            desc: "This is a test @any".to_string(),
+            status: "pending".to_string(),
+            modified: "today".to_string()
+        }];
+        let result = filter_items_not_present_in_list(&input_list, vec!["@important"]);
+        assert_eq!(result, input_list);
+
     }
 }
