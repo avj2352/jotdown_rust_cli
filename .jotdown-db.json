@@ -3,75 +3,63 @@
   "todos": [
     {
       "id": 1,
-      "desc": "DS Algo: Refresh Python from neetcode video @important",
-      "status": "pending",
-      "modified": "2023-10-28T18:55:48.283507+00:00"
+      "desc": "VideoMemo: Bugfix - fix dark light mode theme toggle @important",
+      "status": "done",
+      "modified": "2023-11-11T19:00:56.165239+00:00"
     },
     {
       "id": 2,
-      "desc": "Videomemo: Update cloudformation stack to request an RDS instance @today",
+      "desc": "Setup DMV appointment at Rahway first @important",
       "status": "pending",
-      "modified": "2023-10-28T18:55:24.875564+00:00"
+      "modified": "2023-11-11T00:50:49.459051+00:00"
     },
     {
       "id": 3,
-      "desc": "Complete remove, clear and sort features of Jotdown v1.0.0 @today",
-      "status": "pending",
-      "modified": "2023-10-16T13:19:39.629426+00:00"
+      "desc": "SHWETHA: Email sugar levels chart to St Peter's Hospital @today",
+      "status": "done",
+      "modified": "2023-11-11T00:51:05.955145+00:00"
     },
     {
       "id": 4,
-      "desc": "SHWETHA: Email sugar levels chart to St Peter's Hospital @today",
-      "status": "pending",
-      "modified": "2023-10-24T11:38:39.909075+00:00"
+      "desc": "Videomemo: Update cloudformation stack to request an RDS instance @today",
+      "status": "done",
+      "modified": "2023-11-08T02:50:00.596044+00:00"
     },
     {
       "id": 5,
-      "desc": "CROSSINGS: Pay monthly rent at Crossings website @week",
-      "status": "done",
-      "modified": "2023-11-02T01:31:52.199079+00:00"
-    },
-    {
-      "id": 7,
-      "desc": "Transfer money to Nandkumar USD 200 @week",
-      "status": "done",
-      "modified": "2023-11-04T15:51:45.394916+00:00"
-    },
-    {
-      "id": 8,
       "desc": "Prep for GDL test and give mock test online @week",
       "status": "pending",
       "modified": "2023-10-16T13:18:50.185219+00:00"
     },
     {
-      "id": 9,
+      "id": 6,
       "desc": "Create ITIN for Shwetha @month",
       "status": "pending",
       "modified": "2023-10-16T18:12:51.752818+00:00"
     },
     {
-      "id": 10,
+      "id": 7,
       "desc": "Malaysia - clear CC balance using School money @month",
       "status": "pending",
       "modified": "2023-10-20T07:32:17.312927+00:00"
     },
     {
-      "id": 11,
+      "id": 8,
       "desc": "SOULLYRICS: Integrate ntfy.sh with SoulLyrics API @month",
       "status": "pending",
       "modified": "2023-10-29T05:00:25.269706+00:00"
     },
     {
-      "id": 12,
-      "desc": "SHWETHA: pay labcorp bill of $44.39 online @month",
+      "id": 9,
+      "desc": "CROSSINGS - Pay PSE&G bill by November 21, 2023 @month",
       "status": "pending",
-      "modified": "2023-10-20T06:15:09.323446+00:00"
+      "modified": "2023-11-07T16:13:55.706777+00:00"
     },
     {
-      "id": 12,
-      "desc": "ANGULAR: Angular v17 announcement on November 6th 2023 @week",
-      "status": "pending",
-      "modified": "2023-11-03T17:52:13.386031+00:00"
+      "id": 10,
+      "desc": "Xfinity monthly bill payment @month",
+      "status": "done",
+      "modified": "2023-11-11T00:49:08.179664+00:00"
     }
   ],
   "reminders": [],
