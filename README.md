@@ -19,6 +19,7 @@
 
 ## Important Links
 
+- [Makefile - Instructions for automating compiling & linking of a file](https://g.co/bard/share/01ed6bb954c6)
 - [Considering Rust for Government Projects and Decision support systems - DSS](https://www.reddit.com/r/rust/comments/17s1o2l/is_rust_a_good_language_for_government_systems/)
 - [⏰JSON to serde_json struct - online generator](https://transform.tools/json-to-rust-serde)
 - [Clap Rust Tutorial](https://www.youtube.com/watch?v=Ot3qCA3Iv_8)
