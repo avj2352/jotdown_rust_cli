@@ -1,5 +1,10 @@
 # Jotdown
 
+## version 1.0.02
+- 11/20/2023
+- BAT scripts for windows build
+- Add `~root~/release` folder to .gitignore list
+
 ## version 1.0.00
 - 11/05/2023
 - ✨Official release of version 1.0.0 ✨

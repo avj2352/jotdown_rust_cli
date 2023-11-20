@@ -1,11 +1,11 @@
 # ✏️Jotdown - Todo CLI app using Rust
 
-![version](https://img.shields.io/badge/version-1.0.00-blue) [![Rust](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml/badge.svg)](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml)
+![version](https://img.shields.io/badge/version-1.0.02-blue) [![Rust](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml/badge.svg)](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml)
 
 - A modern Todo application with extra features!
 - I'd probably go with **Jotdown** until I get a better name!
 
-## 🚨 RELEASE v1.0.0 available
+## 🚨 RELEASE v1.0.02 available
 
 - Release executable `v1.0.0` available under `release` folder. 
 - Copy the executable or run the shell script `build_release.sh`
