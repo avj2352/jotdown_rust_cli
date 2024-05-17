@@ -1,8 +1,8 @@
-use std::io::{self, BufRead, Read};
-use std::fs::{self, File};
-use std::f64;
-use colored::Colorize;
 use chrono::{DateTime, Utc};
+use colored::Colorize;
+use std::f64;
+use std::fs::{self, File};
+use std::io::{self, BufRead, Read};
 // custom
 use crate::util::config::get_db_file_path;
 use crate::util::display::display_err_reading_file;
@@ -31,11 +31,14 @@ fn is_float_with_single_digit_decimal_places(num: f64) -> bool {
 #[allow(dead_code)]
 fn read_file_with_lines() -> Result<Vec<String>, String> {
     let source_json = "jotdown-db.json";
-    let file:File = File::open(source_json).unwrap();
+    let file: File = File::open(source_json).unwrap();
     // another approach - using io::BufReader for large files
     let reader = io::BufReader::new(file);
-    let result: Vec<String> = reader.lines().into_iter()
-        .map(|item| item.unwrap()).collect();
+    let result: Vec<String> = reader
+        .lines()
+        .into_iter()
+        .map(|item| item.unwrap())
+        .collect();
     Ok(result)
 }
 
@@ -69,16 +72,37 @@ fn colored_crate_features() {
     "you can use truecolor values too!".truecolor(0, 255, 136);
     "background truecolor also works :)".on_truecolor(135, 28, 167);
     "you can also make bold comments".bold();
-    println!("{} {} {}", "or use".cyan(), "any".italic().yellow(), "string type".cyan());
+    println!(
+        "{} {} {}",
+        "or use".cyan(),
+        "any".italic().yellow(),
+        "string type".cyan()
+    );
     "or change advice. This is red".yellow().blue().red();
-    "or clear things up. This is default color and style".red().bold().clear();
+    "or clear things up. This is default color and style"
+        .red()
+        .bold()
+        .clear();
     "purple and magenta are the same".purple().magenta();
-    "bright colors are also allowed".bright_blue().on_bright_white();
-    "you can specify color by string".color("blue").on_color("red");
+    "bright colors are also allowed"
+        .bright_blue()
+        .on_bright_white();
+    "you can specify color by string"
+        .color("blue")
+        .on_color("red");
     "and so are normal and clear".normal().clear();
     String::from("this also works!").green().bold();
-    let result: String = format!("{}", "format works as expected. This will be padded".on_truecolor(135, 28, 167));
-    let output: String = format!("{}", "and this will be green but truncated to 3 chars".red().bold().clear());
+    let result: String = format!(
+        "{}",
+        "format works as expected. This will be padded".on_truecolor(135, 28, 167)
+    );
+    let output: String = format!(
+        "{}",
+        "and this will be green but truncated to 3 chars"
+            .red()
+            .bold()
+            .clear()
+    );
     println!("{}", result);
     println!("{}", output);
 }
@@ -98,7 +122,8 @@ pub fn read_file_from_path() -> String {
     let file_path: String = get_db_file_path();
     let mut file: File = File::open(file_path).unwrap();
     let mut json_string: String = String::new();
-    file.read_to_string(&mut json_string).expect(&*display_err_reading_file());
+    file.read_to_string(&mut json_string)
+        .expect(&*display_err_reading_file());
     json_string
 }
 
@@ -113,27 +138,37 @@ pub fn get_status_type(phrase: String) -> StatusColorType {
         "@today" => StatusColorType::Today,
         "@week" => StatusColorType::Week,
         "@month" => StatusColorType::Month,
-        _ => StatusColorType::Info
-    }
+        "@overdue" => StatusColorType::Overdue,
+        _ => StatusColorType::Info,
+    };
+}
+
+// Parser to find "@tag" specifically at the end of the input
+fn parse_tag_at_end(input: &str) -> &str {
+    input.split_whitespace().rev() // Split the string into words and reverse iterate
+        .find(|&word| word.starts_with('@')) // Find the first word (in reverse) that starts with '@'
+        .unwrap_or("") // If not found, return the original input
 }
 
 /**
 * helper fn to retrieve tags from a given sentence
 * @param {String} text
-* @returns tuple {(String, usize, usize)} - word, start_index, end_index
+* @returns tuple {(String, String)} - remaining text, tag
 * Using 2 pointers
 */
-pub fn get_tag_annotation_from_string(text: &String) -> (String, usize, usize) {
-    // guard check
-    if !text.contains("@") {
-        return (String::from(""), 0, 0);
+pub fn get_tag_annotation_from_string(text: &String) -> (String, String, String) {
+    let mut remaining: &str = "";
+    let mut preceded: &str = "";
+    let tag_word = parse_tag_at_end(text);
+    if tag_word == "" || tag_word == "@" {
+        (text.to_owned(), "".to_owned(), "".to_owned())
+    } else {
+        if let Some(idx) = text.find(tag_word) {
+            preceded = &text[..idx-1].trim();
+            remaining = &text[idx + tag_word.len()..];
+        }
+        (preceded.to_owned(), tag_word.to_owned(), remaining.to_owned())
     }
-    let start = text.find("@").unwrap();
-    let mut end = start+1;
-    while end < text.len() && !text.chars().nth(end).unwrap().is_whitespace() {
-        end += 1;
-    }
-    (text[start..end].to_string(), start, end)
 }
 
 /**
@@ -142,16 +177,19 @@ pub fn get_tag_annotation_from_string(text: &String) -> (String, usize, usize) {
 * @returns {String} highlighted text
 */
 pub fn highlight_text(text: &String) -> String {
-    let (tag, i, j) = get_tag_annotation_from_string(&text);
+    let (preceded, tag, remaining) = get_tag_annotation_from_string(&text);
     // edge case - if no tag annotation
-    if tag == "" { return text.clone(); }
+    if tag == "" {
+        return preceded.clone();
+    }
     // FIXME: small cost of cloning - tags are not long sentences
     let mut result = String::new();
     let tag_clone = tag.clone();
     let text_highlight: String = get_status_type(tag).highlight_color(tag_clone);
-    result.push_str(&text[..i]);
+    result.push_str(preceded.as_str());
+    result.push_str(" ");
     result.push_str(text_highlight.as_str());
-    result.push_str(&text[j..]);
+    result.push_str(remaining.as_str());
     result
 }
 
@@ -168,7 +206,6 @@ pub fn get_current_date_time_iso() -> String {
 *
 */
 pub fn check_string_is_i32_or_f64(string: &str) -> Option<IntFloat> {
-
     if let Ok(i32_value) = string.parse::<i32>() {
         return Some(IntFloat::Int(i32_value));
     }
@@ -176,7 +213,7 @@ pub fn check_string_is_i32_or_f64(string: &str) -> Option<IntFloat> {
         if is_float_with_single_digit_decimal_places(f64_value) {
             return Some(IntFloat::Float(f64_value));
         } else {
-            return None
+            return None;
         }
     }
     None
@@ -226,6 +263,13 @@ mod tests {
     }
 
     #[test]
+    fn test_tag_parsing() {
+        let input = "This is a string @tag";
+        let result = parse_tag_at_end(input);
+        assert_eq!("@tag", result);
+    }
+
+    #[test]
     fn test_colored_crate_features() {
         colored_crate_features();
     }
@@ -238,17 +282,25 @@ mod tests {
     }
 
     #[test]
+    fn test_parse_tag_string() {
+        let input: &str = "This is a simple tag annotation @tag";
+        let tag_word = parse_tag_at_end(input);
+        assert_eq!("@tag", tag_word);
+    }
+
+    #[test]
     fn test_tag_when_no_annotation() {
         let input: String = String::from("text with no annotation");
         let result = get_tag_annotation_from_string(&input);
-        assert_eq!(result.0, "");
+        assert_eq!(result.0, input);
     }
 
     #[test]
     fn test_tag_when_annotation_contains_week() {
         let input: String = String::from("text with annotation @week");
         let result = get_tag_annotation_from_string(&input);
-        assert_eq!(result.0, "@week");
+        assert_eq!(result.0, "text with annotation");
+        assert_eq!(result.1, "@week");
     }
 
     #[test]
@@ -276,7 +328,10 @@ mod tests {
     #[test]
     fn test_is_float_with_single_digit_decimal_places_returns_true() {
         let input: f64 = 1.1;
-        println!("Value is: {}", is_float_with_single_digit_decimal_places(input));
+        println!(
+            "Value is: {}",
+            is_float_with_single_digit_decimal_places(input)
+        );
         let result = is_float_with_single_digit_decimal_places(input);
         assert_eq!(result, true);
     }

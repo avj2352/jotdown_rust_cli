@@ -7,7 +7,7 @@
 
 ## 🚨 RELEASE v1.0.02 available
 
-- Release executable `v1.0.0` available under `release` folder. 
+- Release executable `v1.0.0` available under `release` folder.
 - Copy the executable or run the shell script `build_release.sh`
 - to generate the latest build (warning: using the shell script, generates a canary build)
 
@@ -18,6 +18,8 @@
 - todov3 / todo
 
 ## Important Links
+
+- [Rust - 100 exercises in Rust!](https://rust-exercises.com/)
 - [Medium - Useful Terminal applications](https://levelup.gitconnected.com/awesome-terminal-applications-e4a06022dffa)
 - [Rust CLI - Traversable options using crossterms KeyEvent](https://www.reddit.com/r/rust/comments/hz3j1h/how_to_make_a_cli_in_rust_that_allows_the_user_to/)
 - [Makefile - Instructions for automating compiling & linking of a file](https://g.co/bard/share/01ed6bb954c6)
@@ -46,6 +48,7 @@ The default store of the JSON file is in $HOME location. This could vary based o
 - Mac OS: $HOME = `/Users/Alice`
 
 > In the upcoming release 1.2.0 you can configure your own path to store `.jotdown-db.json`, by setting the env variable
+
 ```bash
 # set datastore path
 JOTDOWN_DB_PATH=~/Dropbox/jotdown.json  Specify DB path [default: $HOME/.jotdown-db.json]
@@ -55,7 +58,8 @@ JOTDOWN_DB_PATH=~/Dropbox/jotdown.json  Specify DB path [default: $HOME/.jotdown
 
 To run jotdown as a cli app using Cargo
 
-Jotdown CLI features - 
+Jotdown CLI features -
+
 ```bash
  jd: Jotdown cli, todo superpowered
 
@@ -68,20 +72,20 @@ Jotdown CLI features -
     * jd add -t 1 Get out of the house    Create a new task for todo item 1
     * jd ls                               Print all pending todo items
     * jd ls --todos                       Print completed and pending todo items
-    * jd ls --all                         Print all items        
-    * jd check 1                          Mark #1 as completed on todos    
+    * jd ls --all                         Print all items
+    * jd check 1                          Mark #1 as completed on todos
     * jd mv 1 42                          Change the id of given todo
     * jd undo 1                           Revert #1 to pending
     * jd rm 1                             Remove #1 item
     * jd clear                            Destroy all todo items
-    * jd clear --done                     Destroy all completed todo items    
+    * jd clear --done                     Destroy all completed todo items
     * jd sort "@important @high"          Sort Todos in the order of their tags as mentioned
 
   Environment variables:
 
     JOTDOWN_FORMAT=pretty                Specify formatter (simple, pretty, mini) [default: simple]
     JOTDOWN_DB_PATH=~/Dropbox/jotdown.json  Specify DB path [default: ~/.jotdown-db.json]
-    
+
 ```
 
 ```bash
@@ -118,11 +122,11 @@ cargo run -- --help
 
 ### release 1.2.0 (Introducing Tasks)
 - jd ls @tag                                     Print todo items containing "@tag"
-- jd ls ~@tag                                    Print todo items not containing "@tag" 
-- jd update --t 5 "New sentence @week"           Edit todo #5 with new sentence 
+- jd ls ~@tag                                    Print todo items not containing "@tag"
+- jd update --t 5 "New sentence @week"           Edit todo #5 with new sentence
 - jd ls                                          Print all pending todo items with their respective tasks (if any)
 - jd add -t 1 Get out of the house               Create a new task for todo item 1
-- jd check 1.1                                   Mark task #1 as completed on todo #1   
+- jd check 1.1                                   Mark task #1 as completed on todo #1
 
 ### release 1.3.0 (Introducing reminders)
 - jd ls --reminder                               Print all reminder todos
@@ -141,7 +145,7 @@ cargo run -- --help
 Typically structure of a `todo-db.json`
 
 > NOTE: in `todo` the position of the element within the HashMap is the order in the UI
-> 
+
 ```json
 {
   "tags": ["important", "today", "week"],
@@ -176,12 +180,12 @@ Typically structure of a `todo-db.json`
 ```
 
 > NOTE: There are 17 representations of white space in unicode text format. So using `text.split_whitespace()` is much
-better alternative to the `.split()` method in Rust
+> better alternative to the `.split()` method in Rust
 
 # Rust - Read and Write to JSON
 
-To store a HashMap as a JSON file in Rust, you can use the `serde_json` crate. 
-This crate provides a serializer and deserializer for JSON data, which can be used to convert Rust data structures 
+To store a HashMap as a JSON file in Rust, you can use the `serde_json` crate.
+This crate provides a serializer and deserializer for JSON data, which can be used to convert Rust data structures
 to and from JSON.
 
 To use `serde_json`, you will first need to add it to your project's dependencies:
@@ -190,8 +194,9 @@ To use `serde_json`, you will first need to add it to your project's dependencie
 # add serde_json to cargo.toml
 cargo add serde_json
 ```
-Once you have added `serde_json`, you can start using it to serialize and 
-deserialize your HashMap. To serialize a HashMap to a JSON file, you can use the 
+
+Once you have added `serde_json`, you can start using it to serialize and
+deserialize your HashMap. To serialize a HashMap to a JSON file, you can use the
 `.to_writer()` function. This function takes a writer as an argument and writes the serialized JSON data to it.
 
 For example, the following code shows how to serialize a HashMap to a JSON file named my_hashmap.json:
@@ -214,7 +219,8 @@ hashmap.insert("key2", "value2");
     Ok(())
 }
 ```
-To deserialize a JSON file into a HashMap, you can use the `.from_reader()` function. 
+
+To deserialize a JSON file into a HashMap, you can use the `.from_reader()` function.
 This function takes a reader as an argument and reads the JSON data from it, returning a deserialized Rust data structure.
 
 For example, the following code shows how to deserialize a JSON file named my_hashmap.json into a HashMap:
@@ -238,9 +244,9 @@ fn main() -> Result<()> {
 
 There is no built-in way to print with strikethrough in Rust. However, there are a few workarounds.
 
-One workaround is to use the ANSI escape sequence for strikethrough. 
-The ANSI escape sequence for strikethrough is `\x9f`. 
-To use it, you can prefix the text you want to strikethrough with the `ANSI escape sequence`. 
+One workaround is to use the ANSI escape sequence for strikethrough.
+The ANSI escape sequence for strikethrough is `\x9f`.
+To use it, you can prefix the text you want to strikethrough with the `ANSI escape sequence`.
 For example, the following code will print the text "Hello, world!" with strikethrough:
 
 ```rust
@@ -251,9 +257,9 @@ fn main() {
 // ̶H̶e̶l̶l̶o̶,̶ ̶w̶o̶r̶l̶d̶!̶
 ```
 
-Another workaround is to use a library such as `crossterm`. 
-The `crossterm` library provides a number of functions for controlling the terminal, 
-including a function for printing with `strikethrough`. To use the `crossterm` library to print with strikethrough, 
+Another workaround is to use a library such as `crossterm`.
+The `crossterm` library provides a number of functions for controlling the terminal,
+including a function for printing with `strikethrough`. To use the `crossterm` library to print with strikethrough,
 you can use the following code:
 
 ```rust
@@ -270,9 +276,11 @@ fn main() {
 ```
 
 # Push Notification Features - Exploration
+
 ## 1. OneSignal
+
 - [OneSignal documentation](https://documentation.onesignal.com/docs)
+
 ## 2. Microsoft Graph API (Todo app)
+
 - [Microsoft Graph API](https://login.microsoftonline.com/common/oauth2/nativeclient)
-
-

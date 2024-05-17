@@ -20,6 +20,7 @@ async fn send_notification(msg: &'static str) -> Result<serde_json::Value, reqwe
 mod tests {
     use super::*;
     #[tokio::test]
+    #[ignore]
     // async test
     async fn test_send_msg() {
         let msg: &str = "Jotdown: You have 8 alerts!";

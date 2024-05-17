@@ -1,5 +1,13 @@
 # Jotdown
 
+## version 1.1.0
+- 05/17/2024
+- Bump up version to `1.1.0`
+- Bugfix: Empty string when tag annotations that are in the middle of the string
+- Remove `ntfy` notification send when unit testing - `send_notifications.rs`
+- Add bugfix unit test scripts
+- Release `1.1.0`
+
 ## version 1.0.02
 - 11/20/2023
 - BAT scripts for windows build

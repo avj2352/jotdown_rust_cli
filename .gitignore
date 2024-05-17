@@ -11,3 +11,4 @@ automation/
 **/**/ui-*.sh
 *.txt
 **/*.txt
+Cargo.lock
