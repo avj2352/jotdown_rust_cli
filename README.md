@@ -1,4 +1,4 @@
-# ✏️Jotdown - Todo CLI app using Rust
+# ✏️ Jotdown - Todo CLI app using Rust
 
 ![version](https://img.shields.io/badge/version-1.0.02-blue) [![Rust](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml/badge.svg)](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml)
 
@@ -18,7 +18,7 @@
 - todov3 / todo
 
 ## Important Links
-
+- [Medium - Useful Terminal applications](https://levelup.gitconnected.com/awesome-terminal-applications-e4a06022dffa)
 - [Rust CLI - Traversable options using crossterms KeyEvent](https://www.reddit.com/r/rust/comments/hz3j1h/how_to_make_a_cli_in_rust_that_allows_the_user_to/)
 - [Makefile - Instructions for automating compiling & linking of a file](https://g.co/bard/share/01ed6bb954c6)
 - [Considering Rust for Government Projects and Decision support systems - DSS](https://www.reddit.com/r/rust/comments/17s1o2l/is_rust_a_good_language_for_government_systems/)

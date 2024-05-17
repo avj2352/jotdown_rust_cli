@@ -3,6 +3,7 @@
 .intellij/
 target/
 release/
+automation/
 
 #ignore files
 .DS_Store
