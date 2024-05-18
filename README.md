@@ -2,7 +2,7 @@
 
 Jotdown CLI, `v1.1.0`. A modern command line Todo application with colorized annotations, written using Rust
 
-![version](https://img.shields.io/badge/version-1.0.02-blue) [![Rust](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml/badge.svg)](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml)
+![version](https://img.shields.io/badge/version-1.1.0-blue) [![Rust](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml/badge.svg)](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml)
 
 - A modern Todo application with extra features!
 - I'd probably go with **Jotdown** until I get a better name!
