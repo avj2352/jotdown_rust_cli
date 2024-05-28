@@ -11,7 +11,12 @@ Jotdown version `1.1.0` CLI features -
 
 ```bash
  jd: Jotdown
-
+       __      __      __                  
+      / /___  / /_____/ /___ _      ______ 
+ __  / / __ \/ __/ __  / __ \ | /| / / __ \
+/ /_/ / /_/ / /_/ /_/ / /_/ / |/ |/ / / / /
+\____/\____/\__/\__,_/\____/|__/|__/_/ /_/ 
+                                           
   Usage:
 
     * jd                                        (default) jd help - Lists the available commands
@@ -72,6 +77,7 @@ Jotdown version `1.1.0` CLI features -
 - [Youtube - Jon Gjengset](https://www.youtube.com/watch?v=jf_ddGnum_4&t=864s)
 - [Github repo - Job Gjengset](https://github.com/jonhoo/codecrafters-bittorrent-rust)
 - [Rust - All algorithms](https://github.com/TheAlgorithms/Rust)
+- [ClI - Typography](https://patorjk.com/software/taag/#p=display&f=Slant&t=Jotdown)
 
 ## NOTE: About the file - .jotdown-db.json
 
