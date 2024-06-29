@@ -1,11 +1,15 @@
-use clap::ArgMatches;
-use crate::dao::read_json::{fetch_todos};
-use crate::dao::write_json::{serialize_todos_to_json};
-use crate::util::display::{display_err_invalid_argument, display_err_sort_todos, display_sort_todos, display_todo_item_checked, display_todo_item_moved, display_todo_item_pending, display_todo_item_removed};
+use crate::dao::read_json::fetch_todos;
+use crate::dao::write_json::serialize_todos_to_json;
+use crate::util::display::{
+    display_err_invalid_argument, display_err_sort_todos, display_sort_todos,
+    display_todo_item_checked, display_todo_item_moved, display_todo_item_pending,
+    display_todo_item_removed,
+};
 use crate::util::enums::{IntFloat, TodoStatusType};
 use crate::util::helpers::{check_string_is_i32_or_f64, get_current_date_time_iso};
+use clap::ArgMatches;
 // custom
-use crate::util::models::{Todo};
+use crate::util::models::Todo;
 
 /**
 * Misc command handler ***********************************
@@ -39,9 +43,9 @@ fn validate_todo_start_end_positions(start: i32, end: i32) -> bool {
 /**
 * function to swap todo items in list
 */
-fn swap_todo_items_based_on_idx (start: i32, end: i32) -> Vec<Todo> {
+fn swap_todo_items_based_on_idx(start: i32, end: i32) -> Vec<Todo> {
     let mut todos: Vec<Todo> = fetch_todos();
-    todos.swap((start-1) as usize, (end-1) as usize);
+    todos.swap((start - 1) as usize, (end - 1) as usize);
     // in-place loop
     for (idx, item) in todos.iter_mut().enumerate() {
         item.id = (idx + 1) as i64;
@@ -49,13 +53,12 @@ fn swap_todo_items_based_on_idx (start: i32, end: i32) -> Vec<Todo> {
     todos
 }
 
-
 /**
 * retrieve todo list from JSON and also perform guard check
 * @param {i32} todo index
 * @returns {Result<Vec<Todo>, String>} todo list
 */
-fn retrieve_todos_guard_check_index (idx: i32) -> Result<Vec<Todo>, String> {
+fn retrieve_todos_guard_check_index(idx: i32) -> Result<Vec<Todo>, String> {
     let todos: Vec<Todo> = fetch_todos();
     if idx < 0 || idx > todos.len() as i32 {
         return Err("argument out of bounds!".to_string());
@@ -71,24 +74,26 @@ fn retrieve_todos_guard_check_index (idx: i32) -> Result<Vec<Todo>, String> {
 * @returns {Vec<Todo>} new list
 * TODO: Make function in place algorithm, right now creates a new list
 */
-fn mark_todo_item_in_list (list: Vec<Todo>, idx: i32, status: TodoStatusType) -> Vec<Todo> {
-    let new_list = list.into_iter().map(|mut item| {
-        if item.id == idx as i64 {
-            item.status = format!("{}",status);
-            item.modified = get_current_date_time_iso();
-        }
-        return item;
-    }).collect();
+fn mark_todo_item_in_list(list: Vec<Todo>, idx: i32, status: TodoStatusType) -> Vec<Todo> {
+    let new_list = list
+        .into_iter()
+        .map(|mut item| {
+            if item.id == idx as i64 {
+                item.status = format!("{}", status);
+                item.modified = get_current_date_time_iso();
+            }
+            return item;
+        })
+        .collect();
     new_list
 }
-
 
 /**
 * function to mark todo item as checked
 * @params {i32} num
 * @returns {Result<(), Err<String>>} result enum
 */
-fn check_todo (num: i32) -> Result<(), String> {
+fn check_todo(num: i32) -> Result<(), String> {
     // ..retrieve todo from list
     // ..check inbounds
     let todos = retrieve_todos_guard_check_index(num)?;
@@ -104,14 +109,15 @@ fn check_todo (num: i32) -> Result<(), String> {
  * @params {i32} num
  * @returns {Result<(), Err<String>>} result enum
  */
-fn remove_todo (num: i32) -> Result<(), String> {
+fn remove_todo(num: i32) -> Result<(), String> {
     // ..retrieve todo from list
     // ..check inbounds
     let todos = retrieve_todos_guard_check_index(num)?;
     // ..mark status as done
-    let new_todos = todos.into_iter().filter(|item| {
-        item.id != num as i64
-    }).collect();
+    let new_todos = todos
+        .into_iter()
+        .filter(|item| item.id != num as i64)
+        .collect();
     // ..write to json file
     serialize_todos_to_json(new_todos)?;
     Ok(())
@@ -122,7 +128,7 @@ fn remove_todo (num: i32) -> Result<(), String> {
  * @params {i32} num
  * @returns {Result<(), Err<String>>} result enum
  */
-fn revert_todo (num: i32) -> Result<(), String> {
+fn revert_todo(num: i32) -> Result<(), String> {
     // ..retrieve todo from list
     // ..check inbounds
     let todos = retrieve_todos_guard_check_index(num)?;
@@ -139,13 +145,19 @@ fn revert_todo (num: i32) -> Result<(), String> {
 * @important, @today, @week, @month, @any
 */
 fn filter_todos_by_text(todos: &Vec<Todo>, text: &str) -> Vec<Todo> {
-    todos.into_iter().filter(|item|
-        item.desc.contains(text)).cloned().collect()
+    todos
+        .into_iter()
+        .filter(|item| item.desc.contains(text))
+        .cloned()
+        .collect()
 }
 
 fn filter_items_not_present_in_list(todos: &Vec<Todo>, text_list: Vec<&str>) -> Vec<Todo> {
-    todos.into_iter().filter(|item |
-        !text_list.iter().any(|s| item.desc.contains(s))).cloned().collect()
+    todos
+        .into_iter()
+        .filter(|item| !text_list.iter().any(|s| item.desc.contains(s)))
+        .cloned()
+        .collect()
 }
 
 fn sort_default_order() -> Result<(), String> {
@@ -173,32 +185,32 @@ fn sort_default_order() -> Result<(), String> {
     for item in list_misc_todos {
         result.push(item);
     }
-    let new_todos: Vec<Todo> = result.into_iter().enumerate()
+    let new_todos: Vec<Todo> = result
+        .into_iter()
+        .enumerate()
         .map(|(idx, mut todo)| {
             todo.id = (idx + 1) as i64;
             return todo;
-        }).collect();
+        })
+        .collect();
     serialize_todos_to_json(new_todos)?;
     Ok(())
 }
-
 
 /**
  * "check "some todo item"" subcommand handler
  * @param {&ArgMatches} args
  */
-pub fn handle_check_todo_task (args: &ArgMatches) {
+pub fn handle_check_todo_task(args: &ArgMatches) {
     // check type
     let argument = args.get_one::<String>("todo").unwrap();
     if let Some(num) = check_string_is_i32_or_f64(argument) {
         match num {
-            IntFloat::Int(int_val) => {
-                match check_todo(int_val) {
-                    Ok(()) => println!("{}", display_todo_item_checked()),
-                    Err(val) => println!("Error! error marking todo item as checked: {}", val)
-                }
+            IntFloat::Int(int_val) => match check_todo(int_val) {
+                Ok(()) => println!("{}", display_todo_item_checked()),
+                Err(val) => println!("Error! error marking todo item as checked: {}", val),
             },
-            IntFloat::Float(flt_val) => println!("You've entered a float: {}", flt_val)
+            IntFloat::Float(flt_val) => println!("You've entered a float: {}", flt_val),
         }
     } else {
         println!("{}", display_err_invalid_argument());
@@ -209,18 +221,16 @@ pub fn handle_check_todo_task (args: &ArgMatches) {
  * "undo todo item" subcommand handler
  * @param {&ArgMatches} args
  */
-pub fn handle_revert_todo_task (args: &ArgMatches) {
+pub fn handle_revert_todo_task(args: &ArgMatches) {
     // check type
     let argument = args.get_one::<String>("todo").unwrap();
     if let Some(num) = check_string_is_i32_or_f64(argument) {
         match num {
-            IntFloat::Int(int_val) => {
-                match revert_todo(int_val) {
-                    Ok(()) => println!("{}", display_todo_item_pending()),
-                    Err(val) => println!("Error! error reverting todo item: {}", val)
-                }
+            IntFloat::Int(int_val) => match revert_todo(int_val) {
+                Ok(()) => println!("{}", display_todo_item_pending()),
+                Err(val) => println!("Error! error reverting todo item: {}", val),
             },
-            IntFloat::Float(flt_val) => println!("You've entered a float: {}", flt_val)
+            IntFloat::Float(flt_val) => println!("You've entered a float: {}", flt_val),
         }
     } else {
         println!("{}", display_err_invalid_argument());
@@ -231,10 +241,14 @@ pub fn handle_revert_todo_task (args: &ArgMatches) {
  * "move todo item" subcommand handler
  * @param {&ArgMatches} args
  */
-pub fn handle_move_todo_task (args: &ArgMatches) {
+pub fn handle_move_todo_task(args: &ArgMatches) {
     // check type
-    let start_pos = args.get_one::<String>("start").expect("Invalid task position [start]");
-    let end_pos = args.get_one::<String>("end").expect("Invalid task position [destination]");
+    let start_pos = args
+        .get_one::<String>("start")
+        .expect("Invalid task position [start]");
+    let end_pos = args
+        .get_one::<String>("end")
+        .expect("Invalid task position [destination]");
     let start: Option<IntFloat> = check_string_is_i32_or_f64(start_pos);
     let end: Option<IntFloat> = check_string_is_i32_or_f64(end_pos);
     match (start, end) {
@@ -248,16 +262,16 @@ pub fn handle_move_todo_task (args: &ArgMatches) {
                     let todos = swap_todo_items_based_on_idx(a_pos, b_pos);
                     serialize_todos_to_json(todos).unwrap();
                     println!("{}", display_todo_item_moved());
-                },
+                }
                 _ => {
                     //TODO: implement move task feature
                     println!("Move task feature coming as part of release 1.2.0");
                 }
             }
-        },
+        }
         (None, None) => println!("You've entered an invalid argument pair!"),
         (Some(_), None) => println!("You've entered an invalid argument pair!"),
-        (None, Some(_)) => println!("You've entered an invalid argument pair!")
+        (None, Some(_)) => println!("You've entered an invalid argument pair!"),
     };
 }
 
@@ -265,18 +279,16 @@ pub fn handle_move_todo_task (args: &ArgMatches) {
  * "remove todo, task item" subcommand handler
  * @param {&ArgMatches} args
  */
-pub fn handle_remove_todo_task (args: &ArgMatches) {
+pub fn handle_remove_todo_task(args: &ArgMatches) {
     // check type
     let argument = args.get_one::<String>("index").unwrap();
     if let Some(num) = check_string_is_i32_or_f64(argument) {
         match num {
-            IntFloat::Int(int_val) => {
-                match remove_todo(int_val) {
-                    Ok(()) => println!("{}", display_todo_item_removed()),
-                    Err(val) => println!("Error! error removing todo item: {}", val)
-                }
+            IntFloat::Int(int_val) => match remove_todo(int_val) {
+                Ok(()) => println!("{}", display_todo_item_removed()),
+                Err(val) => println!("Error! error removing todo item: {}", val),
             },
-            IntFloat::Float(flt_val) => println!("You've entered a float: {}", flt_val)
+            IntFloat::Float(flt_val) => println!("You've entered a float: {}", flt_val),
         }
     } else {
         println!("{}", display_err_invalid_argument());
@@ -292,12 +304,10 @@ pub fn handle_sort_todo_reminder(args: &ArgMatches) {
     let argument = args.get_one::<String>("list_string");
     match argument {
         Some(_) => println!("sort input text provided....(Coming soon!)"),
-        None => {
-            match sort_default_order() {
-                Ok(()) => println!("{}",display_sort_todos()),
-                Err(_) => println!("{}",display_err_sort_todos())
-            }
-        }
+        None => match sort_default_order() {
+            Ok(()) => println!("{}", display_sort_todos()),
+            Err(_) => println!("{}", display_err_sort_todos()),
+        },
     };
 }
 
@@ -310,11 +320,11 @@ mod tests {
         let input_list: Vec<Todo> = vec![Todo {
             id: 1,
             desc: "This is a test @any".to_string(),
+            tag: "@any".to_string(),
             status: "pending".to_string(),
-            modified: "today".to_string()
+            modified: "today".to_string(),
         }];
         let result = filter_items_not_present_in_list(&input_list, vec!["@important"]);
         assert_eq!(result, input_list);
-
     }
 }

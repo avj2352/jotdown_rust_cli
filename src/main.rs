@@ -24,7 +24,7 @@ use crate::facade::misc_handler::{
 };
 
 const APP_DESCRIPTION: &str = "A modern Todo application with extra features!";
-const VERSION: &str = "1.1.0";
+const VERSION: &str = "1.2.0";
 
 fn main() {
     // init db

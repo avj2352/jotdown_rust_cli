@@ -3,65 +3,75 @@
   "todos": [
     {
       "id": 1,
-      "desc": "VideoMemo: Bugfix - fix dark light mode theme toggle @important",
-      "status": "done",
-      "modified": "2023-11-11T19:00:56.165239+00:00"
+      "desc": "DSAlgo: Complete till page 164 - Grokking Algos book @important",
+      "tag": "@important",
+      "status": "pending",
+      "modified": "2024-05-19T03:22:41.324387+00:00"
     },
     {
       "id": 2,
-      "desc": "Setup DMV appointment at Rahway first @important",
-      "status": "pending",
-      "modified": "2023-11-11T00:50:49.459051+00:00"
+      "desc": "InnovativeIdea: Add ChristAG youtube transcribe to Google Keep @important",
+      "tag": "@important",
+      "status": "done",
+      "modified": "2024-06-10T14:30:29.716046+00:00"
     },
     {
       "id": 3,
-      "desc": "SHWETHA: Email sugar levels chart to St Peter's Hospital @today",
+      "desc": "TimeTravel: Complete Add new Timer page @today",
+      "tag": "@today",
       "status": "done",
-      "modified": "2023-11-11T00:51:05.955145+00:00"
+      "modified": "2024-06-08T09:19:24.440364+00:00"
     },
     {
       "id": 4,
-      "desc": "Videomemo: Update cloudformation stack to request an RDS instance @today",
+      "desc": "TimerTravel: Complete Edit Timer page @today",
+      "tag": "@today",
       "status": "done",
-      "modified": "2023-11-08T02:50:00.596044+00:00"
+      "modified": "2024-06-08T09:19:26.451039+00:00"
     },
     {
       "id": 5,
-      "desc": "Prep for GDL test and give mock test online @week",
-      "status": "pending",
-      "modified": "2023-10-16T13:18:50.185219+00:00"
+      "desc": "Manna: Start designing Manna website React + Stripe @today",
+      "tag": "@today",
+      "status": "done",
+      "modified": "2024-06-11T11:16:40.308211+00:00"
     },
     {
       "id": 6,
-      "desc": "Create ITIN for Shwetha @month",
+      "desc": "KRISTINE: Kristine's passport preparations @week",
+      "tag": "@week",
       "status": "pending",
-      "modified": "2023-10-16T18:12:51.752818+00:00"
+      "modified": "2024-02-28T09:17:35.673058+00:00"
     },
     {
       "id": 7,
-      "desc": "Malaysia - clear CC balance using School money @month",
-      "status": "pending",
-      "modified": "2023-10-20T07:32:17.312927+00:00"
+      "desc": "Pamten: Follow up with Uma for Health Insurance E-cards @week",
+      "tag": "@week",
+      "status": "done",
+      "modified": "2024-06-21T22:24:26.494437+00:00"
     },
     {
       "id": 8,
-      "desc": "SOULLYRICS: Integrate ntfy.sh with SoulLyrics API @month",
+      "desc": "Pamten: Follow up with tax office for Federal Tax Refund @week",
+      "tag": "@week",
       "status": "pending",
-      "modified": "2023-10-29T05:00:25.269706+00:00"
+      "modified": "2024-06-11T11:15:53.398074+00:00"
     },
     {
       "id": 9,
-      "desc": "CROSSINGS - Pay PSE&G bill by November 21, 2023 @month",
-      "status": "pending",
-      "modified": "2023-11-07T16:13:55.706777+00:00"
+      "desc": "KRISTINE: Design an invitation for Kristines dedication on June 30th 2024 @week",
+      "tag": "@week",
+      "status": "done",
+      "modified": "2024-06-23T12:39:33.045962+00:00"
     },
     {
       "id": 10,
-      "desc": "Xfinity monthly bill payment @month",
+      "desc": "KRISTINE: Follow up with Kristine Passport @month",
+      "tag": "@month",
       "status": "done",
-      "modified": "2023-11-11T00:49:08.179664+00:00"
+      "modified": "2024-06-19T08:56:21.156581+00:00"
     }
   ],
-  "reminders": [],
   "tasks": []
+}
 }

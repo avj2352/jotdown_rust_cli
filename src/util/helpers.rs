@@ -145,15 +145,44 @@ pub fn get_status_type(phrase: String) -> StatusColorType {
 
 // Parser to find "@tag" specifically at the end of the input
 fn parse_tag_at_end(input: &str) -> &str {
-    input.split_whitespace().rev() // Split the string into words and reverse iterate
+    input
+        .split_whitespace()
+        .rev() // Split the string into words and reverse iterate
         .find(|&word| word.starts_with('@')) // Find the first word (in reverse) that starts with '@'
         .unwrap_or("") // If not found, return the original input
+}
+
+// Parser to find "topic:" specifically at the beginning of the input
+fn parse_topic_at_beginning(input: &str) -> &str {
+    input
+        .split_whitespace()
+        .find(|&word| word.ends_with(":")) // Find the first word that ends with ':'
+        .unwrap_or("")
+}
+
+/**
+* helper fn to retrieve topic from a given sentence
+* @param {String} text
+* @returns tuplie {(String, String)} - topic, remaining
+* Using 2 pointers
+*/
+pub fn get_topic_from_string(text: &String) -> (String, String) {
+    let mut remaining: &str = "";
+    let topic = parse_topic_at_beginning(text);
+    if topic == "" {
+        ("".to_owned(), text.to_owned())
+    } else {
+        if let Some(idx) = text.find(topic) {
+            remaining = &text[idx + topic.len()..];
+        }
+        (topic.to_owned(), remaining.to_owned())
+    }
 }
 
 /**
 * helper fn to retrieve tags from a given sentence
 * @param {String} text
-* @returns tuple {(String, String)} - remaining text, tag
+* @returns tuple {(String, String, String)} - remaining text, tag
 * Using 2 pointers
 */
 pub fn get_tag_annotation_from_string(text: &String) -> (String, String, String) {
@@ -164,10 +193,14 @@ pub fn get_tag_annotation_from_string(text: &String) -> (String, String, String)
         (text.to_owned(), "".to_owned(), "".to_owned())
     } else {
         if let Some(idx) = text.find(tag_word) {
-            preceded = &text[..idx-1].trim();
+            preceded = &text[..idx - 1].trim();
             remaining = &text[idx + tag_word.len()..];
         }
-        (preceded.to_owned(), tag_word.to_owned(), remaining.to_owned())
+        (
+            preceded.to_owned(),
+            tag_word.to_owned(),
+            remaining.to_owned(),
+        )
     }
 }
 
@@ -177,7 +210,8 @@ pub fn get_tag_annotation_from_string(text: &String) -> (String, String, String)
 * @returns {String} highlighted text
 */
 pub fn highlight_text(text: &String) -> String {
-    let (preceded, tag, remaining) = get_tag_annotation_from_string(&text);
+    let (topic, remaining_text) = get_topic_from_string(&text);
+    let (preceded, tag, remaining) = get_tag_annotation_from_string(&remaining_text);
     // edge case - if no tag annotation
     if tag == "" {
         return preceded.clone();
@@ -185,7 +219,10 @@ pub fn highlight_text(text: &String) -> String {
     // FIXME: small cost of cloning - tags are not long sentences
     let mut result = String::new();
     let tag_clone = tag.clone();
+    let topic_highlight: String = get_status_type("@month".to_string()).highlight_color(topic);
     let text_highlight: String = get_status_type(tag).highlight_color(tag_clone);
+    result.push_str(topic_highlight.as_str());
+    result.push_str(" ");
     result.push_str(preceded.as_str());
     result.push_str(" ");
     result.push_str(text_highlight.as_str());

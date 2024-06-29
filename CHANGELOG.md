@@ -1,5 +1,14 @@
 # Jotdown
 
+## version 1.2.0
+- 06/29/2024
+- Bump up version to `1.2.0`
+- Highlight: Highlight topics with cyan color
+- Feature: Update description given todo index
+- Feature: Change tag given todo index
+- Remove `send_notification.rs`
+- Release `1.2.0`
+
 ## version 1.1.0
 - 05/17/2024
 - Bump up version to `1.1.0`
@@ -15,7 +24,7 @@
 
 ## version 1.0.00
 - 11/05/2023
-- ✨Official release of version 1.0.0 ✨
+- ✨ Official release of version 1.0.0 ✨
 - Includes sort and notification features
 - Includes all features of todo node js cli application
 
@@ -52,4 +61,3 @@
 - Setup folder structure
 - Install required dependencies
 - Added Config file `config.rs` for DB file generation
-

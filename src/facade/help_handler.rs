@@ -11,7 +11,7 @@ const HELP_TEXT: &'static str = r#"
 / /_/ / /_/ / /_/ /_/ / /_/ / |/ |/ / / / /
 \____/\____/\__/\__,_/\____/|__/|__/_/ /_/
 
-    ✨ Jotdown CLI, v1.1.0. A modern command line Todo application with colorized annotation, written using Rust ✨
+    ✨ Jotdown CLI, v1.2.0. A modern command line Todo application with colorized annotation, written using Rust ✨
 
     📖 Usage:
 
