@@ -43,7 +43,7 @@ fn clear_all_items() -> Result<(), String> {
 fn clear_all_done_items() -> Result<(), String> {
     let todo_list: Vec<Todo> = crate::dao::read_json::fetch_todos();
     // guard check
-    if todo_list.len() == 0 {
+    if todo_list.is_empty() {
         println!("\n{}\n", display_empty_todo());
         return Ok(());
     }

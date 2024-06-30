@@ -4,7 +4,7 @@
 * > jd help
 */
 
-const HELP_TEXT: &'static str = r#"
+const HELP_TEXT: &str = r#"
        __      __      __
       / /___  / /_____/ /___ _      ______
  __  / / __ \/ __/ __  / __ \ | /| / / __ \
@@ -45,7 +45,7 @@ const HELP_TEXT: &'static str = r#"
 * prints command manifest
 */
 pub fn handle_help() -> String {
-    format!("{}", HELP_TEXT)
+    format!("{}", HELP_TEXT.to_string())
 }
 
 #[cfg(test)]

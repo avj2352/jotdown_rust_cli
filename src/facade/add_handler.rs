@@ -34,7 +34,7 @@ fn create_todo(text: String, tag: String) -> Todo {
  */
 pub fn handle_add_todo(args: &ArgMatches) {
     let argument = args.get_one::<String>("todo").unwrap();
-    let (_, tag, _) = get_tag_annotation_from_string(&argument);
+    let (_, tag, _) = get_tag_annotation_from_string(argument);
     let record: Todo = create_todo(argument.to_string(), tag);
     let json_string: String = read_file_from_path();
     let mut model: FileRequestResponse = parse_json_from_string(json_string);

@@ -36,9 +36,8 @@ pub fn handle_list(matches: &ArgMatches) {
 fn list_all_todos() {
     let todo_list: Vec<Todo> = crate::dao::read_json::fetch_todos();
     // guard check
-    if todo_list.len() == 0 {
+    if todo_list.is_empty() {
         println!("\n{}\n", display_empty_todo());
-        return ();
     }
     // display todos header
     println!("{}", display_todo_header());
@@ -48,7 +47,7 @@ fn list_all_todos() {
         .filter(|item| item.status == "done")
         .count();
     display_progress_styled(completed_count as u64, todo_list.len() as u64);
-    for (_, item) in todo_list.iter().enumerate() {
+    for item in todo_list.iter() {
         let text = highlight_text(&item.desc);
         if item.status == TodoStatusType::Done.to_string() {
             println!("{}.\t{}  {}", item.id, "✓".green().bold(), text);
@@ -65,9 +64,8 @@ fn list_all_todos() {
 fn list_pending_todos() {
     let todo_list: Vec<Todo> = fetch_todos();
     // guard check
-    if todo_list.len() == 0 {
+    if todo_list.is_empty() {
         println!("\n{}\n", display_empty_todo());
-        return ();
     }
     // display Todos header
     println!("{}", display_todo_header());
@@ -79,10 +77,9 @@ fn list_pending_todos() {
     display_progress_styled(completed_count as u64, todo_list.len() as u64);
 
     // display todo list
-    for (_, item) in todo_list
+    for item in todo_list
         .iter()
         .filter(|item| item.status == "pending")
-        .enumerate()
     {
         let text = highlight_text(&item.desc);
         println!("{}.\t{}  {}", item.id, "✖".red().bold(), text);
@@ -96,9 +93,8 @@ fn list_pending_todos() {
 fn list_completed_todos() {
     let todo_list: Vec<Todo> = fetch_todos();
     // guard check
-    if todo_list.len() == 0 {
+    if todo_list.is_empty() {
         println!("\n{}\n", display_empty_todo());
-        return ();
     }
     let completed_count = todo_list
         .iter()

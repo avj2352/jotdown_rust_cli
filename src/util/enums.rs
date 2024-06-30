@@ -63,13 +63,13 @@ pub enum StatusColorType {
 // Enum methods
 impl StatusColorType {
     pub fn highlight_color(&self, phrase: String) -> String {
-        return match *self {
+        match *self {
             StatusColorType::Important => format!("{}", phrase.as_str().magenta().bold()),
             StatusColorType::Today => format!("{}", phrase.as_str().blue().bold()),
             StatusColorType::Week => format!("{}", phrase.as_str().green().bold()),
             StatusColorType::Month => format!("{}", phrase.as_str().cyan().bold()),
             StatusColorType::Info => format!("{}", phrase.as_str().purple().bold()),
             StatusColorType::Overdue => format!("{}", phrase.as_str().red().bold()),
-        };
+        }
     }
 }

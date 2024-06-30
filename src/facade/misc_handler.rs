@@ -262,7 +262,6 @@ pub fn handle_move_todo_task(args: &ArgMatches) {
                 (IntFloat::Int(a_pos), IntFloat::Int(b_pos)) => {
                     if !validate_todo_start_end_positions(a_pos, b_pos) {
                         println!("Error: invalid index range!");
-                        return ();
                     }
                     let todos = swap_todo_items_based_on_idx(a_pos, b_pos);
                     serialize_todos_to_json(todos).unwrap();
