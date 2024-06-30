@@ -1,12 +1,11 @@
 use serde_json::from_str;
 // custom
-use crate::util::models::{FileRequestResponse, Todo};
 use crate::util::helpers::read_file_from_path;
+use crate::util::models::{FileRequestResponse, Todo};
 
 /**
  * DAO access layer to read from JSON file
  */
-
 
 /**
  * parse FileRequestResponse from string
@@ -16,7 +15,6 @@ pub fn parse_json_from_string(input: String) -> FileRequestResponse {
     let response: FileRequestResponse = from_str(input.as_str()).unwrap();
     response
 }
-
 
 /**
  * list all todos - pending & done

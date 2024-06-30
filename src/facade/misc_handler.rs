@@ -161,15 +161,20 @@ fn filter_items_not_present_in_list(todos: &Vec<Todo>, text_list: Vec<&str>) -> 
 }
 
 fn sort_default_order() -> Result<(), String> {
-    let tag_list = vec!["@important", "@today", "@week", "@month"];
+    let tag_list = vec!["@overdue", "@important", "@today", "@week", "@month"];
     let mut result: Vec<Todo> = Vec::new();
     let todos = fetch_todos();
+
+    let overdue_todos = filter_todos_by_text(&todos, "@overdue");
     let important_todos = filter_todos_by_text(&todos, "@important");
     let today_todos = filter_todos_by_text(&todos, "@today");
     let week_todos = filter_todos_by_text(&todos, "@week");
     let month_todos = filter_todos_by_text(&todos, "@month");
     let list_misc_todos = filter_items_not_present_in_list(&todos, tag_list);
     // TODO: filter out any other todo items with miscellaneous tags
+    for item in overdue_todos {
+        result.push(item);
+    }
     for item in important_todos {
         result.push(item);
     }

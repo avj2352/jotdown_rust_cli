@@ -1,8 +1,8 @@
+use crate::dao::read_json::fetch_todos;
+use crate::util::display::{display_empty_todo, display_progress_styled, display_todo_header};
+use crate::util::enums::TodoStatusType;
 use clap::ArgMatches;
 use colored::Colorize;
-use crate::dao::read_json::fetch_todos;
-use crate::util::display::{display_empty_todo, display_todo_header};
-use crate::util::enums::TodoStatusType;
 // custom
 use crate::util::helpers::highlight_text;
 use crate::util::models::Todo;
@@ -16,15 +16,14 @@ use crate::util::models::Todo;
  * "ls -t" or default subcommand handler
  * @param {&ArgMatches} args
  */
-pub fn handle_list (matches: &ArgMatches) {
+pub fn handle_list(matches: &ArgMatches) {
     if matches.get_flag("all") {
         list_all_todos();
     } else if matches.get_flag("todos") {
         list_pending_todos();
     } else if matches.get_flag("done") {
         list_completed_todos();
-    }
-    else {
+    } else {
         // default > "ls -t"
         list_pending_todos();
     }
@@ -41,17 +40,22 @@ fn list_all_todos() {
         println!("\n{}\n", display_empty_todo());
         return ();
     }
-    println!("{}",display_todo_header());
-    for (_, item) in todo_list
+    // display todos header
+    println!("{}", display_todo_header());
+    // display progress bar
+    let completed_count = todo_list
         .iter()
-        .enumerate() {
-            let text= highlight_text(&item.desc);
-            if item.status == TodoStatusType::Done.to_string() {
-                println!("{}.\t{}  {}", item.id, "✓".green().bold(), text);
-            } else {
-                println!("{}.\t{}  {}", item.id, "✖".red().bold(), text);
-            }
+        .filter(|item| item.status == "done")
+        .count();
+    display_progress_styled(completed_count as u64, todo_list.len() as u64);
+    for (_, item) in todo_list.iter().enumerate() {
+        let text = highlight_text(&item.desc);
+        if item.status == TodoStatusType::Done.to_string() {
+            println!("{}.\t{}  {}", item.id, "✓".green().bold(), text);
+        } else {
+            println!("{}.\t{}  {}", item.id, "✖".red().bold(), text);
         }
+    }
 }
 
 /**
@@ -65,15 +69,24 @@ fn list_pending_todos() {
         println!("\n{}\n", display_empty_todo());
         return ();
     }
-    println!("{}",display_todo_header());
-    for (_, item) in todo_list
-            .iter()
-            .filter(|item| item.status == "pending")
-            .enumerate() {
-                let text= highlight_text(&item.desc);
-                println!("{}.\t{}  {}", item.id, "✖".red().bold(), text);
+    // display Todos header
+    println!("{}", display_todo_header());
+    // display progress bar
+    let completed_count = todo_list
+        .iter()
+        .filter(|item| item.status == "done")
+        .count();
+    display_progress_styled(completed_count as u64, todo_list.len() as u64);
 
-            }
+    // display todo list
+    for (_, item) in todo_list
+        .iter()
+        .filter(|item| item.status == "pending")
+        .enumerate()
+    {
+        let text = highlight_text(&item.desc);
+        println!("{}.\t{}  {}", item.id, "✖".red().bold(), text);
+    }
 }
 
 /**
@@ -87,12 +100,21 @@ fn list_completed_todos() {
         println!("\n{}\n", display_empty_todo());
         return ();
     }
-    println!("{}",display_todo_header());
+    let completed_count = todo_list
+        .iter()
+        .filter(|item| item.status == "done")
+        .count();
+    // display Todos header
+    println!("{}", display_todo_header());
+    // display progress bar
+    display_progress_styled(completed_count as u64, todo_list.len() as u64);
+    // display todo list
     for (_, item) in todo_list
         .iter()
         .filter(|item| item.status == "done")
-        .enumerate() {
-        let text= highlight_text(&item.desc);
+        .enumerate()
+    {
+        let text = highlight_text(&item.desc);
         println!("{}.\t{}  {}", item.id, "✓".green().bold(), text);
     }
 }

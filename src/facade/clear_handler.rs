@@ -14,13 +14,12 @@ use crate::util::models::Todo;
  * "clear" or default subcommand handler
  * @param {&ArgMatches} args
  */
-pub fn handle_clear_list (matches: &ArgMatches) {
+pub fn handle_clear_list(matches: &ArgMatches) {
     if matches.get_flag("done") {
         clear_all_done_items().unwrap();
     } else if matches.get_flag("todos") {
         clear_all_done_items().unwrap();
-    }
-    else {
+    } else {
         clear_all_items().unwrap();
     }
 }
@@ -30,7 +29,7 @@ pub fn handle_clear_list (matches: &ArgMatches) {
 * @param {&ArgMatches} args
 */
 fn clear_all_items() -> Result<(), String> {
-    let new_todo_list: Vec<Todo> = vec!();
+    let new_todo_list: Vec<Todo> = vec![];
     serialize_todos_to_json(new_todo_list).unwrap();
     let success = format!("{}", "Cleared all items..!".cyan().italic());
     println!("{}", success);
@@ -48,21 +47,20 @@ fn clear_all_done_items() -> Result<(), String> {
         println!("\n{}\n", display_empty_todo());
         return Ok(());
     }
-    let new_todo_list= todo_list.into_iter().filter(|item| item.status == "pending").collect();
+    let new_todo_list = todo_list
+        .into_iter()
+        .filter(|item| item.status == "pending")
+        .collect();
     serialize_todos_to_json(new_todo_list).unwrap();
     let success = format!("{}", "Cleared done items..!".cyan().italic());
     println!("{}", success);
     Ok(())
 }
 
-
-
 // TODO: to only run this test locally
 #[cfg(test)]
 mod tests {
     use super::*;
-
-
 
     #[test]
     #[ignore]

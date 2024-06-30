@@ -1,9 +1,9 @@
-use std::fs::write;
 use crate::dao::read_json::parse_json_from_string;
 use crate::util::config::get_db_file_path;
 use crate::util::display::{display_err_serializing_json, display_err_writing_to_file};
 use crate::util::helpers::read_file_from_path;
 use crate::util::models::{FileRequestResponse, Todo};
+use std::fs::write;
 
 /**
  * update model and serialize to json
@@ -20,7 +20,7 @@ pub fn serialize_model_to_json(model: FileRequestResponse) {
  * @params {Vec<Todo>} todo list
  * @returns {Result<(), String>}
  */
-pub fn serialize_todos_to_json (list: Vec<Todo>) -> Result<(), String> {
+pub fn serialize_todos_to_json(list: Vec<Todo>) -> Result<(), String> {
     let json_string: String = read_file_from_path();
     let mut model: FileRequestResponse = parse_json_from_string(json_string);
     model.todos = list;

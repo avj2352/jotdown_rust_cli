@@ -1,15 +1,14 @@
+use crate::util::display::{display_err_serializing_json, display_err_writing_to_file};
+use crate::util::models::FileRequestResponse;
 /**
 * Get db JSON file
 */
 use dirs;
-use std::fs::{File, write};
+use std::fs::{write, File};
 use std::path::PathBuf;
-use crate::util::display::{display_err_serializing_json, display_err_writing_to_file};
-use crate::util::models::FileRequestResponse;
 
 // make db file location configurable (default - $HOME)
 const DB_JSON_FILE: &str = ".jotdown-db.json";
-
 
 /**
 * initialize model if file is newly created
@@ -20,7 +19,6 @@ pub fn initialize_model_to_json(path: &str) {
     let json_string = serde_json::to_string(&new_model).expect(&*display_err_serializing_json());
     write(path, json_string.as_bytes()).expect(&*display_err_writing_to_file());
 }
-
 
 /**
 * create jotdown-db.json if file does not exists
@@ -50,7 +48,9 @@ pub fn get_db_file_path() -> String {
     path.push(home_dir);
     path.push(DB_JSON_FILE);
     match path.to_str() {
-        None => {println!("Error reading path to string")}
+        None => {
+            println!("Error reading path to string")
+        }
         Some(val) => {
             create_file_if_not_exists(val).unwrap();
             result = val.to_string();

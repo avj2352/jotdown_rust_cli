@@ -4,8 +4,7 @@
 - 06/29/2024
 - Bump up version to `1.2.0`
 - Highlight: Highlight topics with cyan color
-- Feature: Update description given todo index
-- Feature: Change tag given todo index
+- Feature: Show completed progress bar with percentage
 - Remove `send_notification.rs`
 - Release `1.2.0`
 

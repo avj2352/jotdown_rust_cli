@@ -1,4 +1,4 @@
-use clap::{ arg, ArgAction, Command };
+use clap::{arg, ArgAction, Command};
 /**
  * Consists of "jd" - clear commands
  * LIST ==============================================================

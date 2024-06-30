@@ -1,4 +1,4 @@
-use clap::{Command};
+use clap::Command;
 /**
 * Consists of "jotdown" / "jd" - miscellaneous commands
 * check command
@@ -15,13 +15,9 @@ use clap::{Command};
 pub fn gen_check_command() -> Command {
     Command::new("check")
         .about("mark as done - todo, task, reminder")
-        .arg(
-            clap::Arg::new("todo")
-                .index(1)
-        )
+        .arg(clap::Arg::new("todo").index(1))
     // TODO: add task and reminder commands here...
 }
-
 
 /**
  * UNDO command
@@ -33,10 +29,7 @@ pub fn gen_check_command() -> Command {
 pub fn gen_undo_command() -> Command {
     Command::new("undo")
         .about("uncheck - todo, task, reminder")
-        .arg(
-            clap::Arg::new("todo")
-                .index(1)
-        )
+        .arg(clap::Arg::new("todo").index(1))
     // TODO: add task and reminder commands here...
 }
 
@@ -48,14 +41,8 @@ pub fn gen_undo_command() -> Command {
 pub fn gen_move_command() -> Command {
     Command::new("mv")
         .about("move task [start] [destination]")
-        .arg(
-            clap::Arg::new("start")
-                .index(1)
-        )
-        .arg(
-            clap::Arg::new("end")
-                .index(2)
-        )
+        .arg(clap::Arg::new("start").index(1))
+        .arg(clap::Arg::new("end").index(2))
 }
 
 /**
@@ -66,10 +53,7 @@ pub fn gen_move_command() -> Command {
 pub fn gen_remove_command() -> Command {
     Command::new("rm")
         .about("remove - todo, task, reminder")
-        .arg(
-            clap::Arg::new("index")
-                .index(1)
-        )
+        .arg(clap::Arg::new("index").index(1))
 }
 
 /**
@@ -81,8 +65,5 @@ pub fn gen_remove_command() -> Command {
 pub fn gen_sort_command() -> Command {
     Command::new("sort")
         .about("sort - todo, task, reminder")
-        .arg(
-            clap::Arg::new("list_string")
-                .index(1)
-        )
+        .arg(clap::Arg::new("list_string").index(1))
 }

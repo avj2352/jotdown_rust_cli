@@ -14,8 +14,5 @@ use clap::Command;
 pub fn gen_add_command() -> Command {
     Command::new("add")
         .about("add a todo, task, reminder")
-        .arg(
-            clap::Arg::new("todo")
-                .index(1)
-        )
+        .arg(clap::Arg::new("todo").index(1))
 }
