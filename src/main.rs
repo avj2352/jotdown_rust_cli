@@ -13,8 +13,9 @@ use crate::features::list::gen_list_command;
 use crate::features::misc::{
     gen_check_command, gen_move_command, gen_remove_command, gen_sort_command, gen_undo_command,
 };
+use crate::features::update::{gen_update_command, gen_update_tag_command};
 // handlers
-use crate::facade::add_handler::handle_add_todo;
+use crate::facade::add_handler::{handle_add_todo, handle_update_description, handle_update_tag};
 use crate::facade::clear_handler::handle_clear_list;
 use crate::facade::help_handler::handle_help;
 use crate::facade::list_handler::handle_list;
@@ -43,6 +44,8 @@ fn main() {
         .subcommand(gen_move_command())
         .subcommand(gen_remove_command())
         .subcommand(gen_clear_command())
+        .subcommand(gen_update_command())
+        .subcommand(gen_update_tag_command())
         .subcommand(gen_sort_command())
         .get_matches();
 
@@ -57,6 +60,10 @@ fn main() {
         handle_revert_todo_task(matches);
     } else if let Some(matches) = cli_matches.subcommand_matches("mv") {
         handle_move_todo_task(matches);
+    } else if let Some(matches) = cli_matches.subcommand_matches("update") {
+        handle_update_description(matches);
+    } else if let Some(matches) = cli_matches.subcommand_matches("tag") {
+        handle_update_tag(matches);
     } else if let Some(matches) = cli_matches.subcommand_matches("rm") {
         handle_remove_todo_task(matches);
     } else if let Some(matches) = cli_matches.subcommand_matches("clear") {

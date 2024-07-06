@@ -37,6 +37,8 @@ Jotdown version `1.2.0` CLI features -
     * jd clear                                  Destroy all todo items
     * jd clear --done                           Destroy all completed todo items
     * jd sort                                   Sort Todos in the order of their tags as mentioned "@important @today @week @month @some-annotation"
+    * jd update 1 "Go shopping today"           Update the description of existing todo item by its position
+    * jd tag 1 "@overdue"                       Change the tag of existing todo item by its position
 
   Environment variables:
 

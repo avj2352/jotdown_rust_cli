@@ -1,5 +1,6 @@
 use chrono::{DateTime, Utc};
 use colored::Colorize;
+use regex::Regex;
 use std::f64;
 use std::fs::{self, File};
 use std::io::{self, BufRead, Read};
@@ -277,6 +278,22 @@ pub fn get_fractional_number(flt_val: f64) -> i32 {
     result.floor() as i32
 }
 
+
+/**
+* Extract description from a given text
+* @param {String} text
+* @returns {String} description
+*/
+pub fn get_description_from_text(text: &str) -> String {
+    let re = Regex::new(r"^(.*?)@.*").unwrap();
+    match re.captures(text) {
+        Some(mat) => mat[1].trim().parse().unwrap(),
+        None => text.to_string(),
+    }
+}
+
+// ******************* UNIT TESTS *************
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -392,5 +409,19 @@ mod tests {
         let exp: i32 = 9;
         let result = get_fractional_number(2.9);
         assert_eq!(result, exp);
+    }
+
+    #[test]
+    fn test_extract_with_with_tag() {
+        let text_01 = "This is a string with @tag";
+        let result = get_description_from_text(text_01);
+        assert_eq!(result, "This is a string with");
+    }
+
+    #[test]
+    fn test_extract_word_with_no_tag() {
+        let text_01 = "This is a string with no tag";
+        let result = get_description_from_text(text_01);
+        assert_eq!(result, "This is a string with no tag");
     }
 }

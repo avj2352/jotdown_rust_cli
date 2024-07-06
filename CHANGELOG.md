@@ -5,6 +5,7 @@
 - Bump up version to `1.2.0`
 - Highlight: Highlight topics with cyan color
 - Feature: Show completed progress bar with percentage
+- Feature: Added `update` and `tag` subcommands
 - Remove `send_notification.rs`
 - Release `1.2.0`
 
