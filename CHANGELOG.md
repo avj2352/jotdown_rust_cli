@@ -1,6 +1,16 @@
 # Jotdown
 
+## version 1.3.0
+- Remove unused library like `reqwest`
+- Fixed `sort` command of Jotdown
+- Now jotdown sorts pending items at top and completed items at bottom
+  when `sort` command is applied
+- Updated `makefile`
+- Added `cleanup` and `build` automation commands to makefile
+
+
 ## version 1.2.0
+- Removed `regex` crate as it adds 1.8mb size to the executable
 - 06/29/2024
 - Bump up version to `1.2.0`
 - Highlight: Highlight topics with cyan color

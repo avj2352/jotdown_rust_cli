@@ -2,7 +2,7 @@ use crate::dao::read_json::{fetch_todos, parse_json_from_string};
 use crate::dao::write_json::{serialize_model_to_json, serialize_todos_to_json};
 use crate::util::display::display_todo_added_msg;
 use crate::util::enums::TodoStatusType;
-use crate::util::helpers::{get_current_date_time_iso, get_description_from_text, get_tag_annotation_from_string, read_file_from_path};
+use crate::util::helpers::{get_current_date_time_iso, get_tag_annotation_from_string, read_file_from_path};
 use clap::ArgMatches;
 // custom
 use crate::util::models::{FileRequestResponse, Todo};
@@ -96,8 +96,9 @@ pub fn handle_update_tag(args: &ArgMatches) {
         .into_iter()
         .map(|mut item| {
             if item.id == id.parse::<i64>().unwrap()  {
-                let parsed_desc: String = get_description_from_text(&item.desc);
-                item.desc = format!("{} {}", parsed_desc, tag);
+                let (preceded, _, _) = get_tag_annotation_from_string(&item.desc);
+                // edge case - if no tag annotation
+                item.desc = format!("{} {}", preceded, tag);
                 item.tag = format!("{}", tag);
                 item.modified = get_current_date_time_iso();
             }

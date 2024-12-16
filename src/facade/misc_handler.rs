@@ -152,6 +152,26 @@ fn filter_todos_by_text(todos: &Vec<Todo>, text: &str) -> Vec<Todo> {
         .collect()
 }
 
+/**
+ * Function to sort
+ * pending items to the top of the list
+ * completed items at the bottom of the list
+ */
+fn sort_pending_and_completed_todos(todos: &Vec<Todo>) -> Vec<Todo> {
+    let pending_todos: Vec<Todo> = todos
+        .into_iter()
+        .filter(|item| item.status == "pending")
+        .cloned()
+        .collect();
+    let done_todos: Vec<Todo> = todos
+        .into_iter()
+        .filter(|item| item.status == "done")
+        .cloned()
+        .collect();
+    let result: Vec<Todo> = [pending_todos, done_todos].concat();
+    result
+}
+
 fn filter_items_not_present_in_list(todos: &Vec<Todo>, text_list: Vec<&str>) -> Vec<Todo> {
     todos
         .into_iter()
@@ -163,15 +183,14 @@ fn filter_items_not_present_in_list(todos: &Vec<Todo>, text_list: Vec<&str>) -> 
 fn sort_default_order() -> Result<(), String> {
     let tag_list = vec!["@overdue", "@important", "@today", "@week", "@month"];
     let mut result: Vec<Todo> = Vec::new();
-    let todos = fetch_todos();
-
+    let todos = fetch_todos();        
     let overdue_todos = filter_todos_by_text(&todos, "@overdue");
     let important_todos = filter_todos_by_text(&todos, "@important");
     let today_todos = filter_todos_by_text(&todos, "@today");
     let week_todos = filter_todos_by_text(&todos, "@week");
     let month_todos = filter_todos_by_text(&todos, "@month");
-    let list_misc_todos = filter_items_not_present_in_list(&todos, tag_list);
-    // TODO: filter out any other todo items with miscellaneous tags
+    let untagged_todos = filter_items_not_present_in_list(&todos, tag_list);
+    // filter out any other todo items with miscellaneous tags
     for item in overdue_todos {
         result.push(item);
     }
@@ -187,10 +206,12 @@ fn sort_default_order() -> Result<(), String> {
     for item in month_todos {
         result.push(item);
     }
-    for item in list_misc_todos {
+    for item in untagged_todos {
         result.push(item);
     }
-    let new_todos: Vec<Todo> = result
+    // sort by pending on top and completed on the bottom
+    let todos_by_status = sort_pending_and_completed_todos(&result);
+    let new_todos: Vec<Todo> = todos_by_status
         .into_iter()
         .enumerate()
         .map(|(idx, mut todo)| {
@@ -198,6 +219,7 @@ fn sort_default_order() -> Result<(), String> {
             return todo;
         })
         .collect();
+    // write to json    
     serialize_todos_to_json(new_todos)?;
     Ok(())
 }
