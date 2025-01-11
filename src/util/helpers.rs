@@ -15,7 +15,7 @@ use crate::util::enums::{IntFloat, StatusColorType};
  * @returns {bool} is float point number or not
  */
 
-// FIXME: Remove use of regex, do without regex
+// Remove use of regex, do without regex
 fn is_float_with_single_digit_decimal_places(num: f64) -> bool {
     // let regex = Regex::new(r"^-?\d+\.\d$").unwrap();
     // regex.is_match(num.to_string().as_str())
@@ -276,7 +276,6 @@ pub fn get_fractional_number(flt_val: f64) -> i32 {
     let result = (flt_val - flt_val.floor()) * 10.0;
     result.floor() as i32
 }
-
 
 /**
 * Extract description from a given text

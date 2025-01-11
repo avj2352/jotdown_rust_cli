@@ -60,8 +60,13 @@ Jotdown `v1.3.0` CLI features -
 - action / act
 - todov3 / todo
 
+## High level Architecture
+
+![Courtesy https://gitdiagram.com](./design/jotdown_gitdiagram.jpg)
+
 ## Important Links
 
+- [Rust - download videos from url](https://github.com/AkhilSharma90/Rust-CLI-Downloader/tree/master)
 - [Rust - 100 exercises in Rust!](https://rust-exercises.com/)
 - [Medium - Useful Terminal applications](https://levelup.gitconnected.com/awesome-terminal-applications-e4a06022dffa)
 - [Rust CLI - Traversable options using crossterms KeyEvent](https://www.reddit.com/r/rust/comments/hz3j1h/how_to_make_a_cli_in_rust_that_allows_the_user_to/)
