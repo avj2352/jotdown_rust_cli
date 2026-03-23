@@ -11,12 +11,13 @@ const HELP_TEXT: &str = r#"
 / /_/ / /_/ / /_/ /_/ / /_/ / |/ |/ / / / /
 \____/\____/\__/\__,_/\____/|__/|__/_/ /_/
 
-    ✨ Jotdown CLI, v1.3.0. A modern command line Todo application with colorized annotation, written using Rust ✨
+    ✨ Jotdown CLI, v1.3.5. A modern command line Todo application with colorized annotation, written using Rust ✨
 
     📖 Usage:
 
     * jd                                        (default) jd help - Lists the available commands
     * jd help                                   Lists the available commands
+    * jd init                                   Initialize a local .jotdown-db.json in current directory
     * jd add "Go shopping"                      Create a new todo item
     * jd add "Go shopping @today"               Create a new todo item with tag annotation @today
     * jd add "Go shopping @important"           Create a new todo item with tag annotation @important
@@ -35,6 +36,12 @@ const HELP_TEXT: &str = r#"
     * jd sort                                   Sort Todos in the order of their tags as mentioned "@important @today @week @month @some-annotation"
     * jd update 1 "Go shopping today"           Update the description of existing todo item by its position
     * jd tag 1 "@overdue"                       Change the tag of existing todo item by its position
+
+  Database location:
+
+      📁 Local database: If .jotdown-db.json exists in current directory, it will be used
+      🏠 Glocal database: Otherwie, falls back to ~/.jotdown-db.json
+      💡 use 'jd init' to create a local database for project-specific todos
 
   Environment variables:
 

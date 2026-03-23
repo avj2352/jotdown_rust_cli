@@ -67,3 +67,12 @@ pub fn gen_sort_command() -> Command {
         .about("sort - todo, task, reminder")
         .arg(clap::Arg::new("list_string").index(1))
 }
+
+/**
+ * INIT command
+ * creates an empty .jotdown-db.json in the current directorry
+ * @returns {Command} returns subcommand
+*/
+pub fn gen_init_command() -> Command {
+    Command::new("init").about("initialize local .jotdown-db.json in current directory")
+}

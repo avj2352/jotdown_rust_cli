@@ -1,5 +1,6 @@
 use crate::dao::read_json::fetch_todos;
 use crate::dao::write_json::serialize_todos_to_json;
+use crate::util::config::initialize_local_db;
 use crate::util::display::{
     display_err_invalid_argument, display_err_sort_todos, display_sort_todos,
     display_todo_item_checked, display_todo_item_moved, display_todo_item_pending,
@@ -8,6 +9,7 @@ use crate::util::display::{
 use crate::util::enums::{IntFloat, TodoStatusType};
 use crate::util::helpers::{check_string_is_i32_or_f64, get_current_date_time_iso};
 use clap::ArgMatches;
+use colored::Colorize;
 // custom
 use crate::util::models::Todo;
 
@@ -183,7 +185,7 @@ fn filter_items_not_present_in_list(todos: &Vec<Todo>, text_list: Vec<&str>) -> 
 fn sort_default_order() -> Result<(), String> {
     let tag_list = vec!["@overdue", "@important", "@today", "@week", "@month"];
     let mut result: Vec<Todo> = Vec::new();
-    let todos = fetch_todos();        
+    let todos = fetch_todos();
     let overdue_todos = filter_todos_by_text(&todos, "@overdue");
     let important_todos = filter_todos_by_text(&todos, "@important");
     let today_todos = filter_todos_by_text(&todos, "@today");
@@ -219,7 +221,7 @@ fn sort_default_order() -> Result<(), String> {
             return todo;
         })
         .collect();
-    // write to json    
+    // write to json
     serialize_todos_to_json(new_todos)?;
     Ok(())
 }
@@ -335,6 +337,38 @@ pub fn handle_sort_todo_reminder(args: &ArgMatches) {
             Err(_) => println!("{}", display_err_sort_todos()),
         },
     };
+}
+
+/**
+ * "init" subcommand handler
+ * create an empty .jotdown-db.json in current directory
+ * @param {&ArgMatches} _args (unused)
+*/
+pub fn handle_init_local_db(_args: &ArgMatches) {
+    match initialize_local_db() {
+        Ok(path) => {
+            println!(
+                "{}",
+                format!("✅ Successfully initialized local db at: {}", path)
+                    .green()
+                    .bold()
+            );
+            println!(
+                "{}",
+                "💡 Run any jd command to use this local db"
+                    .bright_blue()
+                    .italic()
+            );
+        }
+        Err(err) => {
+            println!(
+                "{}",
+                format!("❌ Error initializing local db: {}", err)
+                    .red()
+                    .bold()
+            );
+        }
+    }
 }
 
 #[cfg(test)]

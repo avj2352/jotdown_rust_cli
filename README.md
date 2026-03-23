@@ -1,13 +1,13 @@
 # ✏️ Jotdown - Todo CLI app using Rust
 
-Jotdown CLI, `v1.3.0`. A modern command line Todo application with colorized annotations, written using Rust
+Jotdown CLI, `v1.3.5`. A modern command line Todo application with colorized annotations, written using Rust
 
 ![version](https://img.shields.io/badge/version-1.2.0-blue) [![Rust](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml/badge.svg)](https://github.com/avj2352/jotdown_rust_cli/actions/workflows/rust.yml)
 
 - A modern Todo application with extra features!
 - I'd probably go with **Jotdown** until I get a better name!
 
-Jotdown `v1.3.0` CLI features -
+Jotdown `v1.3.5` CLI features -
 
 ```bash
  jd: Jotdown
@@ -21,6 +21,7 @@ Jotdown `v1.3.0` CLI features -
 
     * jd                                        (default) jd help - Lists the available commands
     * jd help                                   Lists the available commands
+    * jd init                                   Initialize a local .jotdown-db.json in current directory
     * jd add "Go shopping"                      Create a new todo item
     * jd add "Go shopping @today"               Create a new todo item with tag annotation @today
     * jd add "Go shopping @important"           Create a new todo item with tag annotation @important
@@ -40,6 +41,12 @@ Jotdown `v1.3.0` CLI features -
     * jd update 1 "Go shopping today"           Update the description of existing todo item by its position
     * jd tag 1 "@overdue"                       Change the tag of existing todo item by its position
 
+  Database location:
+
+      📁 Local database: If .jotdown-db.json exists in current directory, it will be used
+      🏠 Glocal database: Otherwie, falls back to ~/.jotdown-db.json
+      💡 use 'jd init' to create a local database for project-specific todos
+
   Environment variables:
 
     JOTDOWN_FORMAT=pretty                Specify formatter (simple, pretty, mini) [default: simple]
@@ -48,9 +55,9 @@ Jotdown `v1.3.0` CLI features -
 ```
 ˙
 
-## 🚨 RELEASE v1.3.0 available
+## 🚨 RELEASE v1.3.5 available
 
-- Release executable `v1.3.0` available under `release` folder.
+- Release executable `v1.3.5` available under `release` folder.
 - Copy the executable or run the shell script `build_release.sh`
 - to generate the latest build (warning: using the shell script, generates a canary build)
 

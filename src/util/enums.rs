@@ -14,17 +14,6 @@ pub enum JotType {
     Task,
 }
 
-/// Enum for Reminder repetition
-#[derive(Serialize, Deserialize, Debug)]
-pub enum ReminderType {
-    Yearly,
-    HalfYearly,
-    Monthly,
-    Weekly,
-    Daily,
-    Hourly,
-}
-
 #[derive(Debug)]
 pub enum IntFloat {
     Int(i32),
