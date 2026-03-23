@@ -92,7 +92,7 @@ pub fn display_db_location(is_local: bool) {
         false => {
             println!(
                 "{}",
-                format!("🏠 Using glocal database at: ~/{}", DB_JSON_FILE)
+                format!("🏠 Using global database at: ~/{}", DB_JSON_FILE)
                     .bright_black()
                     .italic()
             );
