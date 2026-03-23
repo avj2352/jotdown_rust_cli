@@ -12,3 +12,4 @@ automation/
 *.txt
 **/*.txt
 Cargo.lock
+.jotdown-db.json
